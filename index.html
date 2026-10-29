@@ -317,6 +317,17 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 .tag p{margin:0 0 .6em}
 .tag a{color:#7A2A12}
 .cap-links{font-family:var(--f-ui);font-stretch:92%;font-weight:600;font-size:1rem;margin:0}
+.tracks{list-style:none;margin:6px 0 0;padding:0;border-top:1px dashed rgba(30,26,18,.35)}
+.tracks li{border-bottom:1px dashed rgba(30,26,18,.35)}
+.tag .tracks a{display:flex;align-items:center;gap:12px;padding:8px 2px;color:var(--paper-ink);text-decoration:none}
+.tr-n{flex:none;width:2em;font-family:var(--f-ui);font-stretch:92%;font-weight:700;font-size:.9rem;color:#7A2A12}
+.tr-x{flex:1;min-width:0;display:grid;line-height:1.25}
+.tr-x b{font-family:var(--f-display);font-weight:600;font-size:1.08rem}
+.tr-x span{font-family:var(--f-ui);font-stretch:92%;font-weight:500;font-size:.92rem;color:var(--paper-soft)}
+.tr-go{flex:none;width:22px;height:22px;color:#7A2A12;opacity:.7;transition:opacity .2s, transform .2s}
+.tag .tracks a:hover .tr-go, .tag .tracks a:focus-visible .tr-go{opacity:1;transform:scale(1.12)}
+.tag .tracks a:hover b{text-decoration:underline;text-decoration-color:#7A2A12;text-underline-offset:3px}
+.tr-note{margin:8px 0 0!important;font-family:var(--f-ui);font-stretch:92%;font-size:.88rem;color:var(--paper-soft)}
 .obj-list{display:flex;flex-wrap:wrap;gap:7px}
 .obj{font-family:var(--f-ui);font-stretch:92%;font-weight:500;font-size:.98rem;border:1px solid var(--edge);background:var(--panel);color:var(--ivory);padding:6px 10px;cursor:pointer;transition:border-color .2s, color .2s}
 .obj:hover{border-color:var(--amber)}
@@ -1517,7 +1528,7 @@ const OBJECTS = [
   { id: "tv", name: "The TV", where: "On the stand", t: "Films and sitcoms. I’ll watch almost anything.", links: [{ t: "Letterboxd", u: "https://letterboxd.com/sjaykh/" }] },
   { id: "quote", name: "The framed quote", where: "Back wall", t: "Lines worth keeping.", links: [{ t: "Quotes", u: "https://sjaykh.in/quotes/" }] },
   { id: "books", name: "The bookshelf", where: "Back wall", t: "Everything I’ve read, shelved.", links: [{ t: "The library", u: "https://sjaykh.in/library/" }] },
-  { id: "music", name: "The record player", where: "By the wall", t: "Something is always playing." },
+  { id: "music", name: "The record player", where: "By the wall", t: "Something is always playing. These are on repeat in my head.", tracks: [{ n: "A1", t: "Imagine", a: "John Lennon", u: "https://music.youtube.com/watch?v=YkgkThdzX-8" }, { n: "A2", t: "You’re Only Human (Second Wind)", a: "Billy Joel", u: "https://music.youtube.com/watch?v=YhxjNYvJbgM" }, { n: "B1", t: "She’s a Rainbow", a: "The Rolling Stones", u: "https://music.youtube.com/watch?v=6c1BThu95d8" }, { n: "B2", t: "Iron", a: "Woodkid", u: "https://music.youtube.com/watch?v=vSkb0kDacjs" }] },
   { id: "laptop", name: "The laptop", where: "On the side table", t: "Side projects, always a few open.", links: [{ t: "Recommend me something", u: "https://recs.sjaykh.in" }, { t: "What I use", u: "https://sjaykh.in/uses-this/" }] },
   { id: "phone", name: "The phone", where: "On the writing table", t: "Face up, on silent. Mostly." },
   { id: "gym", name: "The dumbbell", where: "On the floor", t: "Lifting, logged.", links: [{ t: "Hevy", u: "https://hevy.com/user/sjaykh" }] }
@@ -1904,10 +1915,14 @@ function renderAptList() {
   $("#seen-count").textContent = `${OBJECTS.filter(o => state.seen[o.id]).length} of ${OBJECTS.length} examined`;
   $$("#room3d .room-fallback .hot").forEach(g => g.classList.toggle("active", g.dataset.obj === APT.current));
 }
+const PLAYI = `<svg class="tr-go" viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="9" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 6.2 L14 10 L8 13.8 Z" fill="currentColor"/></svg>`;
+function tracksHTML(ts) {
+  return `<ol class="tracks" aria-label="On repeat">${ts.map(x => `<li><a href="${x.u}" target="_blank" rel="noopener" aria-label="${x.t} by ${x.a}, on YouTube Music (opens in a new tab)"><span class="tr-n">${x.n}</span><span class="tr-x"><b>${x.t}</b><span>${x.a}</span></span>${PLAYI}</a></li>`).join("")}</ol><p class="tr-note">Tap a track to play it on YouTube Music.</p>`;
+}
 function showObj(id, fromRoom) {
   const o = OBJECTS.find(x => x.id === id); if (!o) return;
   state.seen[id] = true; save(); APT.current = id;
-  $("#caption").innerHTML = `<span class="label">${o.where}</span><h3>${o.name}</h3><p>${o.t}</p>${o.links ? `<p class="cap-links">${o.links.map(link).join(" &middot; ")}</p>` : ""}`;
+  $("#caption").innerHTML = `<span class="label">${o.where}</span><h3>${o.name}</h3><p>${o.t}</p>${o.links ? `<p class="cap-links">${o.links.map(link).join(" &middot; ")}</p>` : ""}${o.tracks ? tracksHTML(o.tracks) : ""}`;
   if (APT.select) APT.select(id);
   $("#room-reset").hidden = false;
   Sound.click();
