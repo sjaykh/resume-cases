@@ -21,6 +21,7 @@ Progress is saved in your browser. Number keys pick options, and Escape goes bac
 - `index.html`: the whole site. HTML, CSS and JavaScript in one file.
 - `audio/`: rain, thunder and page sounds, loaded only when sound is turned on.
 - `sanjay-krishna-resume.pdf`: the resume behind the "Download the PDF" button.
+- `og.jpg`: the 1200×630 preview image that shows up when the link is shared.
 - `apartment.webp`: a still of the 3D apartment, used on the "Who is Sanjay?" door on the cover.
 - `CNAME`: points GitHub Pages at resume.sjaykh.in.
 
