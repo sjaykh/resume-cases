@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#0B0A08">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230B0A08%27/%3E%3Ccircle cx=%2714%27 cy=%2714%27 r=%278%27 fill=%27none%27 stroke=%27%23E39A38%27 stroke-width=%273%27/%3E%3Cpath d=%27M20 20 L27 27%27 stroke=%27%23E39A38%27 stroke-width=%273.5%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0A1310">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230A1310%27/%3E%3Ccircle cx=%2714%27 cy=%2714%27 r=%278%27 fill=%27none%27 stroke=%27%23E8B43A%27 stroke-width=%273%27/%3E%3Cpath d=%27M20 20 L27 27%27 stroke=%27%23E8B43A%27 stroke-width=%273.5%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
 <title>The Rough Book Cases</title>
 <meta name="description" content="Sanjay Krishna’s resume as a detective game: five product cases from five years at Entri, a rainy-night 3D apartment, and the plain case file.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,10 +14,11 @@
 <style>
 /* Layout: a grounded detective story in monsoon Kerala. A letterboxed night cover in the rain, a lamp-lit evidence board in 3D perspective over a hand-drawn Kochi map, case spreads (camcorder still and notebook beside the dialogue), and a WebGL apartment: cool streetlight through the blinds, warm lamps inside. One committed dark world; paper documents carry their own ink colours. */
 :root{
-  --night:#0B0A08; --panel:#16140F; --panel-2:#1D1A13; --edge:#312C22;
-  --ivory:#EEE5CF; --ivory-soft:#AFA690; --ivory-mute:#827A69;
-  --amber:#E39A38; --amber-hi:#F6C56F; --on-amber:#1C1205;
-  --string:#B83E26;
+  --night:#0A1310; --panel:#101C17; --panel-2:#15251E; --edge:#24382E;
+  --ivory:#EEE8D5; --ivory-soft:#A9B6A6; --ivory-mute:#7C8B7C;
+  --amber:#E8B43A; --amber-hi:#F5CD6A; --on-amber:#1E1503;
+  --leaf:#7DB46C; --leaf-hi:#A6D58F; --leaf-dim:#1E3424;
+  --string:#B4492F; --laterite:#B4492F;
   --paper:#E6DBC1; --paper-ink:#1E1A12; --paper-soft:#5E533D;
   --v-pattern:#86D0AE; --v-first:#EBA57A; --v-empathy:#EE97AE; --v-instr:#9DBFEA; --v-audacity:#F2C65E;
   --f-display:"Gloock", "Georgia", "Times New Roman", serif;
@@ -34,7 +35,7 @@
 html{background:var(--night)}
 body{background:var(--night);color:var(--ivory);font-family:var(--f-body);font-size:17px;line-height:1.6;font-optical-sizing:auto;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 .wrap{max-width:1200px;margin:0 auto;overflow-x:clip;padding-left:max(16px, env(safe-area-inset-left, 0px));padding-right:max(16px, env(safe-area-inset-right, 0px));padding-block:4px 40px;position:relative;z-index:1}
-a{color:var(--amber-hi);text-underline-offset:3px}
+a{color:var(--leaf-hi);text-underline-offset:3px}
 :focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 h1,h2,h3,h4{text-wrap:balance}
 .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
@@ -45,7 +46,7 @@ h1,h2,h3,h4{text-wrap:balance}
 /* film overlays */
 .grain{position:fixed;inset:-120px;z-index:60;pointer-events:none;opacity:.09;background-size:180px 180px;will-change:transform;animation:grain .8s steps(5) infinite}
 @keyframes grain{0%{transform:translate3d(0,0,0)}20%{transform:translate3d(-40px,30px,0)}40%{transform:translate3d(30px,-50px,0)}60%{transform:translate3d(-60px,-20px,0)}80%{transform:translate3d(50px,40px,0)}100%{transform:translate3d(0,0,0)}}
-.vignette{position:fixed;inset:0;z-index:59;pointer-events:none;background:radial-gradient(ellipse at 50% 45%, transparent 56%, rgba(8,5,2,.55) 100%)}
+.vignette{position:fixed;inset:0;z-index:59;pointer-events:none;background:radial-gradient(ellipse at 50% 45%, transparent 56%, rgba(2,8,6,.55) 100%)}
 .shutter{position:fixed;inset:0;z-index:58;background:#000;opacity:0;pointer-events:none}
 .shutter.cut{animation:cut .46s ease}
 @keyframes cut{0%{opacity:0}38%{opacity:1}52%{opacity:.86}62%{opacity:1}100%{opacity:0}}
@@ -55,7 +56,7 @@ h1,h2,h3,h4{text-wrap:balance}
 
 /* buttons */
 .btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-ui);font-weight:600;font-size:.95rem;letter-spacing:.06em;text-transform:uppercase;padding:10px 16px;border:1px solid var(--amber);background:var(--amber);color:var(--on-amber);text-decoration:none;cursor:pointer;transition:transform .2s, box-shadow .2s}
-.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,.45), 0 0 24px rgba(227,154,56,.35)}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 22px rgba(0,0,0,.45), 0 0 24px rgba(232,180,58,.35)}
 .btn.ghost{background:transparent;color:var(--ivory);border-color:var(--edge)}
 .btn.ghost:hover{border-color:var(--amber)}
 .sound{display:inline-flex;align-items:center;gap:8px;font-family:var(--f-ui);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;background:rgba(10,9,7,.6);color:var(--ivory-soft);border:1px solid var(--edge);padding:5px 10px;cursor:pointer}
@@ -78,7 +79,7 @@ h1,h2,h3,h4{text-wrap:balance}
 
 /* cover */
 .cover{display:grid;gap:20px;padding-block:16px 4px}
-.scene{position:relative;width:100%;aspect-ratio:16/9;max-height:84vh;overflow:hidden;background:#0B0A08;box-shadow:0 40px 90px rgba(0,0,0,.65), inset 0 0 0 1px var(--edge);isolation:isolate}
+.scene{position:relative;width:100%;aspect-ratio:16/9;max-height:84vh;overflow:hidden;background:#06100D;box-shadow:0 40px 90px rgba(0,0,0,.65), inset 0 0 0 1px var(--edge);isolation:isolate}
 .layer{position:absolute;inset:-5%;will-change:transform}
 .layer svg{width:100%;height:100%;display:block}
 .rain{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
@@ -87,7 +88,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .flash.go{animation:lightning 1.1s ease-out}
 @keyframes lightning{0%{opacity:0}4%{opacity:.4}9%{opacity:.04}14%{opacity:.3}30%{opacity:0}100%{opacity:0}}
 .far-land{transition:fill .12s}
-.scene.lit .far-land{fill:#3A4352}
+.scene.lit .far-land{fill:#33463C}
 .blink{animation:blink 2.4s steps(1) infinite}
 @keyframes blink{0%,60%{opacity:1}61%,100%{opacity:.15}}
 .fog{animation:drift 46s linear infinite alternate}
@@ -109,9 +110,9 @@ h1,h2,h3,h4{text-wrap:balance}
 .lb.t{top:0;transform-origin:top center;animation:lbIn 2s .25s cubic-bezier(.65,0,.2,1) both}
 .lb.b{bottom:0;transform-origin:bottom center;animation:lbIn 2s .25s cubic-bezier(.65,0,.2,1) both}
 @keyframes lbIn{from{transform:scaleY(4.6)}to{transform:scaleY(1)}}
-.titles{position:absolute;left:0;right:0;bottom:11%;z-index:6;padding:clamp(18px,4vw,52px);padding-top:90px;background:linear-gradient(to top, rgba(6,4,2,.88), rgba(6,4,2,.4) 60%, transparent);display:grid;gap:10px}
+.titles{position:absolute;left:0;right:0;bottom:11%;z-index:6;padding:clamp(18px,4vw,52px);padding-top:90px;background:linear-gradient(to top, rgba(3,10,8,.9), rgba(3,10,8,.42) 60%, transparent);display:grid;gap:10px}
 .kicker{font-family:var(--f-ui);font-weight:600;color:var(--amber-hi);letter-spacing:.34em;text-transform:uppercase;font-size:clamp(.72rem,1.3vw,.9rem);margin:0}
-.album-title{font-size:clamp(2.9rem,8.2vw,6.8rem);letter-spacing:-.01em;color:var(--ivory);text-shadow:0 0 40px rgba(227,154,56,.3), 0 2px 0 rgba(0,0,0,.7);animation:titleIn 2.8s .3s cubic-bezier(.2,.7,.2,1) both}
+.album-title{font-size:clamp(2.9rem,8.2vw,6.8rem);letter-spacing:-.01em;color:var(--ivory);text-shadow:0 0 40px rgba(232,180,58,.3), 0 2px 0 rgba(0,0,0,.7);animation:titleIn 2.8s .3s cubic-bezier(.2,.7,.2,1) both}
 @keyframes titleIn{from{opacity:0;letter-spacing:.08em;filter:blur(8px)}to{opacity:1;letter-spacing:-.01em;filter:none}}
 .rule{display:block;width:min(340px,50%);height:1px;background:linear-gradient(90deg,var(--amber),transparent);opacity:.7;transform-origin:left;animation:rule 2.2s 1.2s cubic-bezier(.2,.7,.2,1) both}
 @keyframes rule{from{transform:scaleX(0)}to{transform:scaleX(1)}}
@@ -119,7 +120,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .doors{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
 .door{position:relative;display:grid;gap:4px;padding:18px 20px 18px 70px;text-decoration:none;color:var(--ivory);background:var(--panel);border:1px solid var(--edge);transition:transform .25s, border-color .25s, box-shadow .25s}
 .door:hover{transform:translateY(-3px);border-color:var(--amber);box-shadow:0 16px 34px rgba(0,0,0,.5)}
-.door-play{background:linear-gradient(135deg,#3A260F,#1A120A 70%);border-color:#5C4320}
+.door-play{background:linear-gradient(135deg,#21402C,#0F1D16 72%);border-color:#3F6A4A}
 .door-k{font-family:var(--f-display);font-weight:400;font-size:2.05rem;line-height:1}
 .door-d{font-family:var(--f-ui);font-weight:500;font-size:.92rem;letter-spacing:.04em;color:var(--ivory-soft)}
 .door .ic{position:absolute;left:20px;top:50%;width:32px;height:32px;transform:translateY(-50%);color:var(--amber)}
@@ -129,7 +130,7 @@ h1,h2,h3,h4{text-wrap:balance}
 .board-head{display:grid;gap:4px;margin-bottom:6px}
 .board-head h2{font-size:clamp(2.4rem,6vw,4rem)}
 .board-wrap{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:24px;align-items:start}
-.wall{position:relative;overflow:hidden;padding:110px 26px 34px;background-color:#2E2B1E;background-image:radial-gradient(ellipse 60% 46% at 50% 6%, rgba(240,170,80,.26), transparent 70%), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='64'><path d='M0 .5H128M0 32.5H128M.5 0V32M64.5 32V64' stroke='black' stroke-opacity='.38' stroke-width='2' fill='none'/></svg>");background-size:auto, 128px 64px;border:1px solid #3E3826;box-shadow:inset 0 0 160px rgba(0,0,0,.8)}
+.wall{position:relative;overflow:hidden;padding:110px 26px 34px;background-color:#1B2C23;background-image:radial-gradient(ellipse 60% 46% at 50% 6%, rgba(240,170,80,.26), transparent 70%), url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='64'><path d='M0 .5H128M0 32.5H128M.5 0V32M64.5 32V64' stroke='black' stroke-opacity='.38' stroke-width='2' fill='none'/></svg>");background-size:auto, 128px 64px;border:1px solid #2C4234;box-shadow:inset 0 0 160px rgba(0,0,0,.8)}
 .pendant{position:absolute;top:0;left:50%;width:160px;height:130px;margin-left:-80px;pointer-events:none;z-index:6;overflow:visible}
 .pendant .sw{transform-box:view-box;transform-origin:80px 0;animation:swing 4.8s ease-in-out infinite alternate}
 .stage{position:relative;perspective:1700px}
@@ -157,7 +158,7 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 .center-p{margin:0;font-family:var(--f-ui);font-weight:600;font-size:.84rem;letter-spacing:.06em;color:var(--paper-soft)}
 .dots{display:inline-flex;gap:5px;vertical-align:middle;margin-right:6px}
 .dots i{width:11px;height:11px;border-radius:50%;border:2px solid var(--paper-soft);display:block}
-.dots i.on{background:#B8301A;border-color:#6A1608}
+.dots i.on{background:var(--leaf);border-color:#3E6B34}
 .center-note{margin:0;font-size:.88rem;color:var(--paper-soft)}
 .clip-card{background-color:#D6CEB8}
 .clip-card .card-title{font-family:var(--f-type);font-size:1.12rem;line-height:1.25}
@@ -165,8 +166,8 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 .folder-card{background-color:#D6B572}
 .folder-card::before{content:"";position:absolute;top:-14px;left:16px;width:90px;height:16px;background:#D6B572;border-radius:4px 4px 0 0}
 .folder-card .pin{left:auto;right:22px;margin-left:0}
-.cabinet{background:linear-gradient(180deg,#1F1A10,#120F09);border:1px solid #3A3220;padding:18px;display:grid;gap:12px;box-shadow:inset 0 0 50px rgba(0,0,0,.65)}
-.plate{justify-self:start;margin:0;font-family:var(--f-ui);font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:#1C1408;background:#D9C08A;padding:3px 10px 2px;box-shadow:0 2px 4px rgba(0,0,0,.55)}
+.cabinet{background:linear-gradient(180deg,#14241C,#0B1612);border:1px solid #2A4134;padding:18px;display:grid;gap:12px;box-shadow:inset 0 0 50px rgba(0,0,0,.65)}
+.plate{justify-self:start;margin:0;font-family:var(--f-ui);font-weight:700;font-size:.78rem;letter-spacing:.22em;text-transform:uppercase;color:#1E1503;background:var(--amber);padding:3px 10px 2px;box-shadow:0 2px 4px rgba(0,0,0,.55)}
 .cabinet ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
 .cabinet li{font-size:.9rem;line-height:1.45}
 .cabinet li b{display:block;font-weight:600;color:var(--ivory)}
@@ -186,7 +187,7 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 .back:hover{color:var(--amber-hi)}
 .skip{font-family:var(--f-ui);font-weight:600;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;background:transparent;color:var(--ivory-soft);border:1px solid var(--edge);padding:6px 11px;cursor:pointer}
 .skip:hover{color:var(--ivory);border-color:var(--amber)}
-.case-title{font-size:clamp(2.6rem,7vw,4.8rem);margin:20px 0 26px;text-shadow:0 0 34px rgba(227,154,56,.16)}
+.case-title{font-size:clamp(2.6rem,7vw,4.8rem);margin:20px 0 26px;text-shadow:0 0 34px rgba(232,180,58,.16)}
 .case-grid{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);grid-template-areas:"side main";gap:34px;align-items:start}
 .side{position:sticky;top:calc(env(safe-area-inset-top, 0px) + 14px);display:grid;gap:22px}
 .case-grid > .side{grid-area:side}
@@ -212,7 +213,7 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 .notes li.empty{color:var(--paper-soft);font-family:var(--f-body);font-style:italic;font-size:.95rem}
 .notes li.in{animation:write 1s ease both}
 @keyframes write{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
-.notes mark{background:linear-gradient(transparent 58%, rgba(227,154,56,.6) 58%);color:inherit}
+.notes mark{background:linear-gradient(transparent 58%, rgba(232,180,58,.6) 58%);color:inherit}
 .log{position:relative}
 .log .ln{font-size:1.08rem;line-height:1.75;margin:0 0 .9em;max-width:64ch}
 .ln .who{font-family:var(--f-ui);font-weight:700;font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;margin-right:9px}
@@ -221,7 +222,7 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 .ln.npc .who{color:var(--ivory)}
 .ln.you{color:var(--ivory-soft);font-style:italic}
 .ln.you .who{color:var(--amber);font-style:normal}
-.ln.question{font-family:var(--f-display);font-weight:400;font-size:2.1rem;line-height:1.08;margin-top:1.1em;color:var(--amber-hi);text-shadow:0 0 24px rgba(227,154,56,.25)}
+.ln.question{font-family:var(--f-display);font-weight:400;font-size:2.1rem;line-height:1.08;margin-top:1.1em;color:var(--amber-hi);text-shadow:0 0 24px rgba(232,180,58,.25)}
 .v-pattern .who{color:var(--v-pattern)}.v-first .who{color:var(--v-first)}.v-empathy .who{color:var(--v-empathy)}.v-instr .who{color:var(--v-instr)}.v-audacity .who{color:var(--v-audacity)}
 .w{animation:wIn .45s ease both}
 @keyframes wIn{from{opacity:0}to{opacity:1}}
@@ -232,7 +233,7 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 .choices:empty{display:none}
 .choice{position:relative;display:flex;gap:12px;align-items:baseline;text-align:left;font:inherit;font-size:1.05rem;line-height:1.5;background:transparent;color:var(--ivory);border:0;padding:10px 12px 10px 14px;cursor:pointer;transition:background .2s, padding .2s}
 .choice::before{content:"";position:absolute;left:0;top:8px;bottom:8px;width:2px;background:var(--amber);transform:scaleY(0);transition:transform .2s}
-.choice:hover{background:rgba(227,154,56,.07);padding-left:20px}
+.choice:hover{background:rgba(232,180,58,.07);padding-left:20px}
 .choice:hover::before{transform:scaleY(1)}
 .choice .num{font-family:var(--f-ui);font-weight:700;color:var(--amber);min-width:1.6em;font-variant-numeric:tabular-nums}
 .choice.key{color:var(--amber-hi)}
@@ -263,7 +264,7 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 
 /* apartment */
 .apt-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,4fr);gap:24px;align-items:start}
-.room3d{position:relative;aspect-ratio:16/11;max-width:100%;background:#0A0907;border:1px solid var(--edge);overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.7);touch-action:manipulation}
+.room3d{position:relative;aspect-ratio:16/11;max-width:100%;background:#070D0B;border:1px solid var(--edge);overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.7);touch-action:manipulation}
 .room3d canvas{display:block;width:100%;height:100%}
 .room3d::after{content:"";position:absolute;inset:0;pointer-events:none;z-index:2;background:radial-gradient(ellipse at 50% 46%, transparent 58%, rgba(6,4,2,.5) 100%);box-shadow:inset 0 0 0 1px rgba(0,0,0,.6)}
 .room3d.hovering{cursor:pointer}
@@ -291,12 +292,12 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 .obj-list{display:flex;flex-wrap:wrap;gap:7px}
 .obj{font-family:var(--f-ui);font-weight:500;font-size:.88rem;letter-spacing:.02em;border:1px solid var(--edge);background:var(--panel);color:var(--ivory);padding:6px 10px;cursor:pointer;transition:border-color .2s, color .2s}
 .obj:hover{border-color:var(--amber)}
-.obj.seen{color:var(--ivory-mute);border-style:dashed}
+.obj.seen{color:var(--leaf-hi);border-style:dashed;border-color:#3E6B34}
 .obj.seen::after{content:" \2713"}
 .obj.active{border-color:var(--amber);color:var(--amber-hi);border-style:solid}
 
 /* origin */
-.clips{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px 24px;margin-top:10px;padding:30px 22px;background-color:#2E2B1E;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='64'><path d='M0 .5H128M0 32.5H128M.5 0V32M64.5 32V64' stroke='black' stroke-opacity='.38' stroke-width='2' fill='none'/></svg>");border:1px solid #3E3826;box-shadow:inset 0 0 140px rgba(0,0,0,.75)}
+.clips{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:30px 24px;margin-top:10px;padding:30px 22px;background-color:#1B2C23;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='128' height='64'><path d='M0 .5H128M0 32.5H128M.5 0V32M64.5 32V64' stroke='black' stroke-opacity='.38' stroke-width='2' fill='none'/></svg>");border:1px solid #2C4234;box-shadow:inset 0 0 140px rgba(0,0,0,.75)}
 .clip{position:relative;background-color:var(--paper);color:var(--paper-ink);background-image:linear-gradient(180deg, rgba(255,255,255,.2), rgba(0,0,0,.05)), var(--noise);padding:24px 20px 16px;transform:rotate(var(--tilt,0deg));box-shadow:0 20px 34px rgba(0,0,0,.6)}
 .clip::before{content:"";position:absolute;top:-11px;left:50%;width:96px;height:24px;margin-left:-48px;background:rgba(236,226,200,.55);transform:rotate(-3deg);box-shadow:0 1px 3px rgba(0,0,0,.3)}
 .clip .label{color:var(--paper-soft)}
@@ -330,6 +331,86 @@ a.pin-card:hover, a.pin-card:focus-visible{transform:translateZ(34px) rotate(0de
 footer.foot{margin-top:50px;padding-top:14px;border-top:1px solid var(--edge);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 18px;font-family:var(--f-ui);font-weight:500;font-size:.84rem;letter-spacing:.04em;color:var(--ivory-mute)}
 footer.foot a{color:var(--ivory-soft)}
 
+
+/* v5: cover why, case flow */
+.premise{margin:4px 0 0;max-width:46ch;font-size:clamp(1rem,1.9vw,1.3rem);line-height:1.4;color:var(--ivory)}
+.cover-low{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:22px;align-items:start}
+.cover-low .doors{grid-template-columns:minmax(0,1fr);gap:14px}
+.why{position:relative;margin:0;background:linear-gradient(180deg,var(--panel-2),var(--panel));border:1px solid var(--edge);padding:22px 24px 18px}
+.why::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:linear-gradient(var(--leaf),var(--amber))}
+.why h2{font-family:var(--f-display);font-weight:400;font-size:clamp(1.6rem,3vw,2.1rem);line-height:1.05;margin:0 0 12px}
+.why p{margin:0 0 .75em;font-size:1.06rem;line-height:1.62}
+.why .sig{margin:4px 0 0;font-family:var(--f-hand);font-size:1.7rem;line-height:1.1;color:var(--amber-hi)}
+.why .sig span{display:block;font-size:1.4rem;color:var(--ivory-soft)}
+.board-cta{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin:6px 0 20px}
+.prog{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-ui);font-weight:600;font-size:.84rem;letter-spacing:.06em;color:var(--ivory-soft)}
+.prog i{width:12px;height:12px;border-radius:50%;border:2px solid var(--edge);display:block}
+.prog i.on{background:var(--leaf);border-color:var(--leaf)}
+.prog b{font-weight:600;margin-left:6px}
+.btn.big{font-size:1rem;padding:13px 20px}
+.btn[disabled]{opacity:.42;cursor:not-allowed;transform:none!important;box-shadow:none!important}
+.btn.ghost-paper{background:transparent;color:var(--paper-ink);border-color:rgba(30,26,18,.45)}
+.linkish{font:inherit;font-family:var(--f-ui);font-weight:600;font-size:.82rem;letter-spacing:.1em;text-transform:uppercase;background:none;border:0;padding:6px 2px;color:var(--ivory-soft);text-decoration:underline;text-underline-offset:4px;cursor:pointer}
+.linkish:hover{color:var(--ivory)}
+.chip{position:absolute;top:-12px;right:12px;z-index:3;font-family:var(--f-ui);font-weight:700;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;padding:4px 9px;background:var(--amber);color:var(--on-amber);box-shadow:0 4px 10px rgba(0,0,0,.4)}
+.chip.done{background:var(--leaf);color:#0D1A10}
+.case-card.next{box-shadow:0 0 0 3px var(--amber), 0 12px 26px rgba(0,0,0,.55)}
+.case-card .status{color:#A8361E;border-style:double;border-width:3px;transform:rotate(-5deg)}
+.case-card.mine .status{opacity:.75}
+.case-nav{display:flex;align-items:center;justify-content:space-between;gap:10px 16px;flex-wrap:wrap;padding-bottom:12px;border-bottom:1px solid var(--edge)}
+.cn-dots{display:flex;gap:7px}
+.cn-dots a{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-ui);font-weight:700;font-size:.82rem;color:var(--ivory-soft);border:1px solid var(--edge);text-decoration:none;transition:border-color .2s,color .2s}
+.cn-dots a:hover{border-color:var(--ivory-soft);color:var(--ivory)}
+.cn-dots a.done{background:var(--leaf-dim);border-color:var(--leaf);color:var(--leaf-hi)}
+.cn-dots a[aria-current]{border-color:var(--amber);color:var(--amber-hi);box-shadow:0 0 0 3px rgba(232,180,58,.22)}
+.cn-arrows{display:flex;gap:16px}
+.case-head{margin:18px 0 6px}
+.case-head .case-title{margin:6px 0 0}
+.steps{list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:18px 0 24px;padding:0}
+.steps li{display:flex;align-items:center;gap:8px;padding-top:9px;border-top:3px solid var(--edge);font-family:var(--f-ui);font-weight:600;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ivory-mute);min-width:0}
+.steps .sn{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;border:1px solid currentColor;font-size:.74rem;letter-spacing:0}
+.steps .st{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.steps li.on{color:var(--amber-hi);border-color:var(--amber)}
+.steps li.on .sn{background:var(--amber);color:var(--on-amber);border-color:var(--amber)}
+.steps li.done{color:var(--leaf-hi);border-color:var(--leaf)}
+.steps li.done .sn{background:var(--leaf-dim)}
+.step-lede{margin:0 0 14px;color:var(--ivory-soft);font-size:1rem}
+.ev-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin:0 0 18px}
+.ev{position:relative;display:flex;flex-direction:column;gap:6px;text-align:left;font:inherit;color:var(--paper-ink);background-color:var(--paper);background-image:linear-gradient(180deg, rgba(255,255,255,.2), rgba(0,0,0,.06)), var(--noise);border:0;padding:16px 14px 12px;cursor:pointer;transform:rotate(var(--tilt,0deg));box-shadow:0 2px 2px rgba(0,0,0,.35), 0 12px 22px rgba(0,0,0,.5);transition:transform .3s cubic-bezier(.2,.7,.2,1), box-shadow .3s}
+.ev:hover{transform:translateY(-4px) rotate(0deg);box-shadow:0 4px 6px rgba(0,0,0,.35), 0 22px 34px rgba(0,0,0,.55)}
+.ev .label{color:var(--paper-soft)}
+.ev-t{font-family:var(--f-display);font-size:1.22rem;line-height:1.1}
+.ev-cue{margin-top:auto;padding-top:6px;font-family:var(--f-ui);font-weight:700;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:#8A3A1E}
+.ev.seen{background-color:#D8D3BF}
+.ev.seen .ev-cue{color:#2F6A2C}
+.ev.current{box-shadow:0 0 0 3px var(--amber), 0 14px 26px rgba(0,0,0,.55);transform:translateY(-3px) rotate(0deg)}
+.ev-view{background:var(--panel);border:1px solid var(--edge);padding:16px 18px 6px;min-height:120px}
+.ev-view .ev-h{font-family:var(--f-display);font-weight:400;font-size:1.5rem;line-height:1.1;margin:4px 0 10px}
+.ev-empty{margin:0 0 10px;color:var(--ivory-mute);font-style:italic}
+.q-head{font-family:var(--f-display);font-weight:400;font-size:clamp(1.9rem,4vw,2.5rem);line-height:1.06;color:var(--amber-hi);margin:0 0 6px;text-shadow:0 0 24px rgba(232,180,58,.2)}
+.calls{display:grid;gap:10px;margin:8px 0 16px}
+.call{display:flex;gap:14px;align-items:flex-start;text-align:left;font:inherit;font-size:1.06rem;line-height:1.45;color:var(--ivory);background:var(--panel);border:1px solid var(--edge);padding:14px 16px;cursor:pointer;transition:border-color .2s, background .2s, transform .2s}
+.call:hover:not([disabled]){border-color:var(--amber);background:var(--panel-2);transform:translateX(3px)}
+.call .num{flex:none;font-family:var(--f-display);font-size:1.6rem;line-height:1;color:var(--amber);min-width:1ch}
+.call.wrong{opacity:.5;text-decoration:line-through;text-decoration-color:var(--laterite);border-style:dashed;cursor:default}
+.call.right{border-color:var(--leaf);background:var(--leaf-dim);color:var(--ivory)}
+.call.right .num{color:var(--leaf-hi)}
+.call[disabled]{cursor:default}
+.actionbar{position:sticky;bottom:0;z-index:4;display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;margin-top:20px;padding:14px 0 calc(14px + env(safe-area-inset-bottom, 0px));background:linear-gradient(to top, var(--night) 72%, rgba(10,19,16,0))}
+.act-note{font-size:.95rem;color:var(--ivory-soft);font-style:italic}
+.verdict .stamp{color:#A8361E;border-color:#A8361E}
+@media (max-width: 820px){
+  .cover-low{grid-template-columns:minmax(0,1fr)}
+  .cover-low .doors{order:-1}
+  .ev-grid{grid-template-columns:minmax(0,1fr);gap:10px}
+  .ev{flex-direction:row;flex-wrap:wrap;align-items:baseline;column-gap:10px;padding:12px 14px}
+  .ev .label{flex:none}
+  .ev-t{flex:1 1 60%;font-size:1.12rem}
+  .ev-cue{margin-top:0;padding-top:0}
+  .steps .st{font-size:.68rem;letter-spacing:.06em}
+  .cn-arrows{width:100%;justify-content:space-between}
+}
+@media (max-width: 480px){ .steps .st{display:none} .steps li.on .st{display:inline} .steps{grid-template-columns:auto auto auto auto;justify-content:start;gap:6px 14px} .steps li{border-top-width:0;padding-top:0} }
 @media print{
   @page{size:A4;margin:12mm 14mm}
   :root{color-scheme:light}
@@ -365,7 +446,7 @@ footer.foot a{color:var(--ivory-soft)}
 @media (prefers-reduced-motion: reduce){
   .grain,.shutter.cut,.flash.go,.panel-art svg,.panel-art::after,.w,.notes li.in,.verdict,.stamp,.album-title,.fog,.shimmer,.flare,.smoke,.swing,.pendant .sw,.blink,.hop,.center-q path,.flashbang.go,.sound.on .bars i,.lb{animation:none!important}
   .center-q path{stroke-dashoffset:0}
-  .pin-card,.btn,.door,.choice{transition:none}
+  .pin-card,.btn,.door,.choice,.ev,.call{transition:none}
 }
 </style>
 </head>
@@ -380,10 +461,10 @@ footer.foot a{color:var(--ivory-soft)}
     <a class="brand" href="#cover">The Rough Book <b>Cases</b></a>
     <div class="right">
       <nav aria-label="Sections">
-        <a href="#board" data-nav="board">Evidence board</a>
+        <a href="#board" data-nav="board">All cases</a>
         <a href="#apartment" data-nav="apartment">Apartment</a>
         <a href="#origin" data-nav="origin">Origin</a>
-        <a href="#file" data-nav="file">Case file</a>
+        <a href="#file" data-nav="file">Plain resume</a>
       </nav>
       <button type="button" class="sound" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="sound-l">Sound off</span></button>
     </div>
@@ -405,26 +486,36 @@ footer.foot a{color:var(--ivory-soft)}
         <p class="kicker">A Kochi mystery in five cases</p>
         <h1 id="cover-title" class="display album-title">The Rough Book Cases</h1>
         <span class="rule" aria-hidden="true"></span>
+        <p class="premise">My resume, as five cases I’ve already solved. Follow along and guess how I cracked them.</p>
       </div>
       <button type="button" class="sound" aria-pressed="false"><span class="bars" aria-hidden="true"><i></i><i></i><i></i></span><span class="sound-l">Sound off</span></button>
     </div>
-    <div class="doors">
-      <a class="door door-play" href="#board">
-        <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="13" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M20 20 L29 29" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg>
-        <span class="door-k">Take the case</span><span class="door-d">Play the five cases &middot; about 5 minutes</span>
-      </a>
-      <a class="door" href="#file">
-        <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 8 H12 L15 11 H29 V27 H3 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M8 17 H24 M8 22 H19" stroke="currentColor" stroke-width="2"/></svg>
-        <span class="door-k">Read the file</span><span class="door-d">The plain resume &middot; 1 minute</span>
-      </a>
+    <div class="cover-low">
+      <article class="why" aria-labelledby="why-title">
+        <h2 id="why-title">Why a detective game?</h2>
+        <p>I always wanted to be a detective. I love patterns, psychology and working things out. Maybe it comes from my late grandfather, who I’m told was a kickass officer in the CID.</p>
+        <p>My approach to product management is much the same. Most of it feels like solving a crime. So here’s my resume as five cases I’ve already cracked: look at the evidence, and guess what I did.</p>
+        <p class="sig">Maybe I’ll still end up solving crimes someday ;)<span>Sanjay</span></p>
+      </article>
+      <div class="doors">
+        <a class="door door-play" href="#case-vanishing" data-play>
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><circle cx="13" cy="13" r="9" fill="none" stroke="currentColor" stroke-width="2.4"/><path d="M20 20 L29 29" stroke="currentColor" stroke-width="3.2" stroke-linecap="round"/></svg>
+          <span class="door-k">Play the cases</span><span class="door-d">Five cases &middot; guess what I did in each</span>
+        </a>
+        <a class="door" href="#file">
+          <svg class="ic" viewBox="0 0 32 32" aria-hidden="true"><path d="M3 8 H12 L15 11 H29 V27 H3 Z" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linejoin="round"/><path d="M8 17 H24 M8 22 H19" stroke="currentColor" stroke-width="2"/></svg>
+          <span class="door-k">The boring version</span><span class="door-d">The plain resume, one page</span>
+        </a>
+        <p class="fine">The cases are dramatised from real work and the dialogue is invented. What actually happened is real. Sound is off unless you turn it on.</p>
+      </div>
     </div>
-    <p class="fine">The cases are dramatised from real work. The dialogue is invented. What actually happened, and everything in the case file, is real. Sound is off unless you turn it on.</p>
   </section>
 
   <section id="v-board" class="view" hidden aria-labelledby="board-title">
     <div class="board-head">
-      <h2 id="board-title" class="display">The evidence board</h2>
-      <p class="lede">Kochi, monsoon. Five cases from five years at Entri, in the order they happened. In each one, follow at least two leads, then make your deduction. As you go, his skills speak up: each line of dialogue is tagged with the skill talking. A case takes about a minute, and you can skip to the verdict whenever you like.</p>
+      <h2 id="board-title" class="display">All cases</h2>
+      <p class="lede">Five cases I’ve already solved, from five years at Entri, in the order they happened. Open one, look at the evidence, and guess what I did.</p>
+      <div class="board-cta" id="board-cta"></div>
     </div>
     <div class="board-wrap">
       <div class="wall" id="wall">
@@ -450,8 +541,8 @@ footer.foot a{color:var(--ivory-soft)}
         <div class="torch" id="torch" aria-hidden="true"></div>
       </div>
       <aside class="cabinet" aria-label="Thought cabinet">
-        <p class="plate">His skills</p>
-        <p class="cab-note">They speak up during each case. The tag before a line tells you which one is talking.</p>
+        <p class="plate">My skills</p>
+        <p class="cab-note">They chip in during each case. The tag before a line tells you which one is talking.</p>
         <ul class="voices">
           <li><i style="background:var(--v-pattern);color:var(--v-pattern)"></i><span><b>Pattern recognition</b> notices what repeats.</span></li>
           <li><i style="background:var(--v-first);color:var(--v-first)"></i><span><b>First principles</b> strips a problem back to what’s actually true.</span></li>
@@ -459,9 +550,9 @@ footer.foot a{color:var(--ivory-soft)}
           <li><i style="background:var(--v-instr);color:var(--v-instr)"></i><span><b>Data rigour</b> checks how the number was measured.</span></li>
           <li><i style="background:var(--v-audacity);color:var(--v-audacity)"></i><span><b>Bias to action</b> asks what’s the worst that can happen, then ships.</span></li>
         </ul>
-        <p class="plate">Thought cabinet</p>
+        <p class="plate">What I took away</p>
         <ul id="cab-thoughts"></ul>
-        <p class="plate">Patterns noted</p>
+        <p class="plate">The patterns</p>
         <ul id="cab-patterns" class="cab-patterns"></ul>
         <button type="button" class="reset" id="reset">Reset progress</button>
       </aside>
@@ -471,8 +562,8 @@ footer.foot a{color:var(--ivory-soft)}
   <section id="v-case" class="view" hidden></section>
 
   <section id="v-apartment" class="view" hidden aria-labelledby="apt-title">
-    <div class="case-top"><a class="back" href="#board">&larr; Board</a><span class="label">Off duty</span><span class="label" id="seen-count"></span></div>
-    <h2 id="apt-title" class="display case-title">The apartment</h2>
+    <div class="case-top"><a class="back" href="#board">&larr; All cases</a><span class="label">Off duty</span><span class="label" id="seen-count"></span></div>
+    <h2 id="apt-title" class="display case-title">My apartment</h2>
     <div class="apt-grid">
       <div class="room3d" id="room3d">
         <div class="room-loading" id="room-loading">Switching the lamps on&hellip;</div>
@@ -497,41 +588,41 @@ footer.foot a{color:var(--ivory-soft)}
   </section>
 
   <section id="v-origin" class="view" hidden aria-labelledby="origin-title">
-    <div class="case-top"><a class="back" href="#board">&larr; Board</a><span class="label">Origin file</span></div>
+    <div class="case-top"><a class="back" href="#board">&larr; All cases</a><span class="label">Origin file</span></div>
     <h2 id="origin-title" class="display case-title">How it started</h2>
     <div class="clips">
       <article class="clip" style="--tilt:-1deg">
         <span class="label">2020 &middot; College</span>
         <h3>Placement season</h3>
-        <p>Everyone lines up for campus interviews. He doesn’t want to. Instead he sends hundreds of cold emails to founders, investors and CEOs, asking for advice and a chance.</p>
-        <p>One comes back with an internship.</p>
+        <p>Everyone lined up for campus interviews. I didn’t want to. Instead I sent hundreds of cold emails to founders, investors and CEOs, asking for advice and a chance.</p>
+        <p>One came back with an internship.</p>
       </article>
       <article class="clip" style="--tilt:1.2deg">
         <span class="label">2020 to 2021 &middot; Internships</span>
         <h3>Three companies in a year</h3>
-        <p>LeapFinance, in study-abroad fintech. Shiprocket, in e-commerce logistics. Then Entri, as a product intern. The first job came the same way as the first internship: by reaching out, with no interview.</p>
+        <p>LeapFinance, in study-abroad fintech. Shiprocket, in e-commerce logistics. Then Entri, as a product intern. My first job came the same way as my first internship: by reaching out, with no interview.</p>
       </article>
       <article class="clip" style="--tilt:-.6deg">
         <span class="label">2021 to now &middot; Entri</span>
         <h3>Intern to Director</h3>
-        <p>Product intern, product manager, senior product manager, Director of Product. One company, five years, and a product team he built from the ground up.</p>
+        <p>Product intern, product manager, senior product manager, Director of Product. One company, five years, and a product team I built from the ground up.</p>
       </article>
       <article class="clip" style="--tilt:.8deg">
         <span class="label">The question</span>
         <h3>What’s the worst that can happen?</h3>
-        <p>Still the first sentence in his head when he makes a decision.</p>
+        <p>Still the first sentence in my head when I make a decision.</p>
         <p><a href="https://sjaykh.medium.com/what-is-the-worst-that-can-happen-85a8c06a8079" target="_blank" rel="noopener">Read the essay</a></p>
       </article>
       <article class="clip press" style="--tilt:-1.4deg">
         <span class="label">Feb 2025 &middot; Press clipping</span>
         <h3>The interview that didn’t land</h3>
-        <p>He applied for Zomato’s Chief of Staff role out of curiosity, didn’t make the final cut, and called it one of the best interview experiences of his career. His post about it was picked up by national press.</p>
+        <p>I applied for Zomato’s Chief of Staff role out of curiosity, didn’t make the final cut, and called it one of the best interview experiences I’ve had. My post about it was picked up by national press.</p>
         <p><a href="https://www.goodreturns.in/news/kerala-man-shares-experience-about-applying-for-chief-of-staff-role-at-zomato-1404485.html" target="_blank" rel="noopener">Read the coverage</a></p>
       </article>
       <article class="clip" style="--tilt:1deg">
         <span class="label">Before all of it</span>
         <h3>The rough book</h3>
-        <p>In school, every idea, sketch and joke went into a rough book. His public wiki is the grown-up version.</p>
+        <p>In school, every idea, sketch and joke went into a rough book. My public wiki is the grown-up version.</p>
         <p><a href="https://wiki.sjaykh.in" target="_blank" rel="noopener">Open the wiki</a></p>
       </article>
     </div>
@@ -541,14 +632,14 @@ footer.foot a{color:var(--ivory-soft)}
 
   <section id="v-file" class="view" hidden aria-labelledby="file-title">
     <div class="dossier-wrap">
-      <p class="tab">Case file</p>
+      <p class="tab">The boring version</p>
       <div class="dossier">
         <header>
           <h2 id="file-title" class="display d-name">Sanjay Krishna</h2>
           <p class="d-role">Director of Product, Entri &middot; Kochi, Kerala</p>
           <p class="d-links"><a href="https://sjaykh.in" target="_blank" rel="noopener">sjaykh.in</a> &middot; <a href="https://wiki.sjaykh.in" target="_blank" rel="noopener">wiki</a> &middot; <a href="https://sjaykh.medium.com" target="_blank" rel="noopener">Medium</a> &middot; <a href="https://x.com/sjaykh" target="_blank" rel="noopener">X</a></p>
           <p class="d-contact contact-slot"></p>
-          <p class="d-actions"><a class="btn" id="dl-pdf" href="sanjay-krishna-resume.pdf" download="Sanjay_Krishna_H_Resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 1.5v9M4 7l4 4 4-4M2.5 14.5h11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Download the PDF</a><span class="dl-note" id="dl-note" aria-live="polite"></span></p>
+          <p class="d-actions"><a class="btn" id="dl-pdf" data-pdf href="sanjay-krishna-resume.pdf" download="Sanjay_Krishna_H_Resume.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="M8 1.5v9M4 7l4 4 4-4M2.5 14.5h11" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Download the PDF</a><span class="dl-note" id="dl-note" aria-live="polite"></span></p>
         </header>
         <p class="d-sum">Five years at Entri, a vernacular edtech company in Kochi, from product intern to Director of Product. Builds AI learning products and growth systems for first-time internet users who learn in their own language, often on low-end Android phones. Works by looking under the metric: at what learners actually do, and at how the number is being measured.</p>
         <section class="d-sec">
@@ -603,7 +694,7 @@ footer.foot a{color:var(--ivory-soft)}
         <section class="d-sec">
           <h3>Skills</h3>
           <ul>
-            <li><b>How he works:</b> pattern recognition, first-principles thinking, user empathy, data rigour, and a bias to action.</li>
+            <li><b>Approach:</b> pattern recognition, first-principles thinking, user empathy, data rigour, and a bias to action.</li>
             <li><b>Analytics and experimentation:</b> SQL, Mixpanel, Metabase, funnel instrumentation, event and metric definition, A/B test design and powering, variable isolation, cohort and retention analysis.</li>
             <li><b>Growth and lifecycle:</b> activation, conversion, referral, reactivation, notification and lifecycle campaigns, lead scoring and lead quality.</li>
             <li><b>AI products:</b> LLM product design, evaluation and assessment loops, building for vernacular, low-bandwidth users.</li>
@@ -620,7 +711,7 @@ footer.foot a{color:var(--ivory-soft)}
 
   <footer class="foot">
     <span><a href="https://sjaykh.in" target="_blank" rel="noopener">sjaykh.in</a> &middot; <a href="https://wiki.sjaykh.in" target="_blank" rel="noopener">wiki</a> &middot; <a href="https://sjaykh.medium.com" target="_blank" rel="noopener">Medium</a> &middot; <a href="https://letterboxd.com/sjaykh/" target="_blank" rel="noopener">Letterboxd</a></span>
-    <span>Written and solved in Kochi, 2026</span>
+    <span>Written and solved in Kochi, 2026 &middot; Rain and thunder: Freesound (soft rain by barkenov, CC0; heavy rain by D W and thunderstorm by RHumphries, CC BY, trimmed). Page sounds: Kenney (CC0).</span>
   </footer>
 </div>
 
@@ -658,58 +749,168 @@ let uidN = 0; const uid = () => "u" + (++uidN);
   } catch (e) {}
 })();
 
-/* ---------- Sound (generated, off by default) ---------- */
+/* ---------- Sound: recorded rain and thunder, built foley, a mix per scene ---------- */
 const Sound = (() => {
-  let ctx = null, master = null, on = false, buf = null;
+  const PREF = "rough-book-sound";
+  const FILES = { rainOut: "audio/rain-out.mp3", rainIn: "audio/rain-in.mp3", t1: "audio/thunder-1.mp3", t2: "audio/thunder-2.mp3", t3: "audio/thunder-3.mp3", page: "audio/page.mp3", open: "audio/open.mp3", stamp: "audio/stamp.mp3" };
+  const MIX = {
+    cover:     { out: .95, in: 0,   room: 0,   music: 0,   clock: 0 },
+    board:     { out: .10, in: .6,  room: .55, music: 0,   clock: 0 },
+    case:      { out: .08, in: .5,  room: .5,  music: 0,   clock: 0 },
+    deduction: { out: .08, in: .5,  room: .5,  music: 0,   clock: 0 },
+    origin:    { out: .08, in: .5,  room: .5,  music: 0,   clock: 0 },
+    file:      { out: .05, in: .32, room: .35, music: 0,   clock: 0 },
+    apartment: { out: .12, in: .8,  room: .45, music: .6,  clock: .55 }
+  };
+  let ctx = null, master = null, on = false, want = false, scene = "cover", buses = null, buf = {}, built = false;
+  try { want = localStorage.getItem(PREF) === "1"; } catch (e) {}
+  const remember = v => { try { localStorage.setItem(PREF, v ? "1" : "0"); } catch (e) {} };
+
+  function noiseBuffer(sec, kind) {
+    const len = Math.floor(ctx.sampleRate * sec), b = ctx.createBuffer(1, len, ctx.sampleRate), d = b.getChannelData(0);
+    let last = 0;
+    for (let i = 0; i < len; i++) {
+      const w = Math.random() * 2 - 1;
+      if (kind === "brown") { last = (last + .02 * w) / 1.02; d[i] = last * 3.5; } else d[i] = w;
+    }
+    return b;
+  }
+  function reverb(sec) {
+    const len = Math.floor(ctx.sampleRate * sec), b = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (let c = 0; c < 2; c++) { const d = b.getChannelData(c); for (let i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6); }
+    const cv = ctx.createConvolver(); cv.buffer = b; return cv;
+  }
+  const gain = v => { const g = ctx.createGain(); g.gain.value = v; return g; };
+  const filt = (type, f, q = .7) => { const n = ctx.createBiquadFilter(); n.type = type; n.frequency.value = f; n.Q.value = q; return n; };
+
+  /* A looping bed made of overlapping copies with equal-power crossfades, so the loop never clicks. */
+  function bed(buffer, dest) {
+    const XF = 2.2, OFF = .06, N = 48;
+    const up = new Float32Array(N), down = new Float32Array(N);
+    for (let i = 0; i < N; i++) { up[i] = Math.sin(i / (N - 1) * Math.PI / 2); down[i] = Math.cos(i / (N - 1) * Math.PI / 2); }
+    let next = ctx.currentTime + .05;
+    const len = buffer.duration - OFF * 2;
+    function one(t) {
+      const s = ctx.createBufferSource(); s.buffer = buffer;
+      const g = ctx.createGain(); g.gain.value = 0; s.connect(g); g.connect(dest);
+      g.gain.setValueCurveAtTime(up, t, XF);
+      g.gain.setValueCurveAtTime(down, t + len - XF, XF);
+      s.start(t, OFF, len);
+      return t + len - XF;
+    }
+    function pump() { while (next < ctx.currentTime + 75) next = one(next); }
+    pump(); setInterval(pump, 5000);
+  }
+
   function build() {
     const AC = window.AudioContext || window.webkitAudioContext;
     ctx = new AC();
-    master = ctx.createGain(); master.gain.value = 0; master.connect(ctx.destination);
-    buf = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
-    const d = buf.getChannelData(0); for (let i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
-    const noise = (rate = 1) => { const s = ctx.createBufferSource(); s.buffer = buf; s.loop = true; s.playbackRate.value = rate; s.start(); return s; };
-    const filt = (type, f, q = .7) => { const b = ctx.createBiquadFilter(); b.type = type; b.frequency.value = f; b.Q.value = q; return b; };
-    const gain = v => { const g = ctx.createGain(); g.gain.value = v; return g; };
-    const r1 = noise(), hp = filt("highpass", 700), lp = filt("lowpass", 5200), rg = gain(.03);
-    r1.connect(hp); hp.connect(lp); lp.connect(rg); rg.connect(master);
-    const r2 = noise(.5), blp = filt("lowpass", 150), bg = gain(.07);
-    r2.connect(blp); blp.connect(bg); bg.connect(master);
-    const r3 = noise(), bp = filt("bandpass", 4600, 9), cg = gain(0);
-    r3.connect(bp); bp.connect(cg); cg.connect(master);
-    const am = ctx.createOscillator(); am.type = "square"; am.frequency.value = 15; const amg = gain(.018); am.connect(amg); amg.connect(cg.gain); am.start();
-    const padLp = filt("lowpass", 560, .8), padG = gain(.022); padLp.connect(padG); padG.connect(master);
-    [[98, "triangle", 0, 1], [146.83, "sine", 4, .7], [196, "sine", -5, .5], [233.08, "sine", 3, .22]].forEach(([f, t, det, g]) => {
-      const o = ctx.createOscillator(); o.type = t; o.frequency.value = f; o.detune.value = det;
-      const og = gain(g); o.connect(og); og.connect(padLp); o.start();
-    });
-    const lfo = ctx.createOscillator(); lfo.frequency.value = .045; const lg = gain(240); lfo.connect(lg); lg.connect(padLp.frequency); lfo.start();
+    const comp = ctx.createDynamicsCompressor(); comp.threshold.value = -16; comp.ratio.value = 3; comp.connect(ctx.destination);
+    master = gain(0); master.connect(comp);
+    buses = { out: gain(0), in: gain(0), room: gain(0), music: gain(0), clock: gain(0) };
+    Object.values(buses).forEach(b => b.connect(master));
+    buses.inFilter = filt("lowpass", 1500, .5); buses.inFilter.connect(buses.in);
+    buses.inBody = filt("lowpass", 420, .5); buses.inBody.connect(buses.in);
+    const brown = ctx.createBufferSource(); brown.buffer = noiseBuffer(6, "brown"); brown.loop = true;
+    const rl = filt("lowpass", 240, .5), rg = gain(.18); brown.connect(rl); rl.connect(rg); rg.connect(buses.room); brown.start();
+    const verb = reverb(2.4), vg = gain(.35), dry = gain(.8), mlp = filt("lowpass", 2600, .4);
+    buses.musicIn = ctx.createGain(); buses.musicIn.connect(mlp); mlp.connect(dry); mlp.connect(verb); verb.connect(vg); dry.connect(buses.music); vg.connect(buses.music);
+    const crackle = ctx.createBuffer(1, ctx.sampleRate * 5, ctx.sampleRate), cd = crackle.getChannelData(0);
+    for (let i = 0; i < cd.length; i++) { cd[i] = (Math.random() * 2 - 1) * .004; if (Math.random() < 9 / ctx.sampleRate) { const a = (Math.random() * .5 + .1) * (Math.random() < .5 ? -1 : 1); for (let k = 0; k < 40 && i + k < cd.length; k++) cd[i + k] += a * Math.exp(-k / 6); } }
+    const cs = ctx.createBufferSource(); cs.buffer = crackle; cs.loop = true; const cf = filt("bandpass", 2800, .5), cg = gain(.5); cs.connect(cf); cf.connect(cg); cg.connect(buses.music); cs.start();
+    buses.white = noiseBuffer(1, "white");
+    music(); clock();
+    built = true;
+    load();
   }
-  function burst(type, freq, q, peak, attack, decay) {
-    if (!on || !ctx) return;
-    const s = ctx.createBufferSource(); s.buffer = buf; s.loop = true;
-    const f = ctx.createBiquadFilter(); f.type = type; f.frequency.value = freq; f.Q.value = q;
-    const g = ctx.createGain(); const t = ctx.currentTime;
-    g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + attack); g.gain.exponentialRampToValueAtTime(.0001, t + attack + decay);
-    s.connect(f); f.connect(g); g.connect(master); s.start(t, Math.random()); s.stop(t + attack + decay + .1);
+  async function load() {
+    await Promise.all(Object.entries(FILES).map(async ([k, url]) => {
+      try { const r = await fetch(url); if (!r.ok) throw 0; const ab = await r.arrayBuffer(); buf[k] = await new Promise((res, rej) => ctx.decodeAudioData(ab, res, rej)); } catch (e) {}
+    }));
+    if (buf.rainOut) { bed(buf.rainOut, buses.out); const t = gain(.55); bed(buf.rainOut, t); t.connect(buses.inBody); }
+    else { const s = ctx.createBufferSource(); s.buffer = noiseBuffer(3, "white"); s.loop = true; const f = filt("lowpass", 3000), g = gain(.08); s.connect(f); f.connect(g); g.connect(buses.out); s.start(); }
+    if (buf.rainIn) bed(buf.rainIn, buses.inFilter);
   }
+
+  /* The record player: slow, soft electric-piano chords. Runs only in the apartment. */
+  function music() {
+    const prog = [[50, 57, 60, 64], [55, 59, 62, 65], [48, 55, 59, 64], [45, 52, 55, 60]];
+    let i = 0, next = 0;
+    function ep(midi, t, dur, vel) {
+      const f = 440 * Math.pow(2, (midi - 69) / 12);
+      const car = ctx.createOscillator(), mod = ctx.createOscillator(), mg = ctx.createGain(), g = ctx.createGain();
+      car.frequency.value = f; mod.frequency.value = f * 2.001;
+      mg.gain.setValueAtTime(f * 1.1, t); mg.gain.exponentialRampToValueAtTime(f * .04, t + 1.4);
+      mod.connect(mg); mg.connect(car.frequency);
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(vel, t + .012); g.gain.exponentialRampToValueAtTime(vel * .3, t + .7); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+      car.connect(g); g.connect(buses.musicIn);
+      car.start(t); mod.start(t); car.stop(t + dur + .05); mod.stop(t + dur + .05);
+    }
+    setInterval(() => {
+      if (!on || scene !== "apartment") { next = 0; return; }
+      if (!next) next = ctx.currentTime + .3;
+      while (next < ctx.currentTime + 5) {
+        const ch = prog[i % prog.length];
+        ch.forEach((m, k) => ep(m, next + k * .04 + Math.random() * .02, 3.8, .045 - k * .006));
+        if (Math.random() < .65) ep(ch[3] + 12 + [0, 2, -2, 3, 5][Math.floor(Math.random() * 5)], next + 1.5 + Math.random() * 1.2, 1.8, .022);
+        next += 4.4; i++;
+      }
+    }, 1000);
+  }
+  function clock() {
+    setInterval(() => {
+      if (!on || scene !== "apartment") return;
+      const t = ctx.currentTime + .05;
+      const s = ctx.createBufferSource(); s.buffer = buses.white;
+      const f = filt("bandpass", 3200, 6), g = ctx.createGain();
+      g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(.12, t + .002); g.gain.exponentialRampToValueAtTime(.0001, t + .03);
+      s.connect(f); f.connect(g); g.connect(buses.clock); s.start(t, Math.random() * .5); s.stop(t + .05);
+    }, 1000);
+  }
+  function play(name, vol = 1, dest) {
+    if (!on || !buf[name]) return false;
+    const s = ctx.createBufferSource(); s.buffer = buf[name];
+    const g = gain(vol); s.connect(g); g.connect(dest || master); s.start(); return true;
+  }
+  function tap(freq, q, peak, decay) {
+    if (!on) return;
+    const t = ctx.currentTime, s = ctx.createBufferSource(); s.buffer = buses.white;
+    const f = filt("bandpass", freq, q), g = ctx.createGain();
+    g.gain.setValueAtTime(.0001, t); g.gain.exponentialRampToValueAtTime(peak, t + .003); g.gain.exponentialRampToValueAtTime(.0001, t + decay);
+    s.connect(f); f.connect(g); g.connect(master); s.start(t, Math.random() * .5); s.stop(t + decay + .05);
+  }
+  function setMix(immediate) {
+    if (!built) return;
+    const m = MIX[scene] || MIX.case, t = ctx.currentTime, tc = immediate ? .05 : .9;
+    ["out", "in", "room", "music", "clock"].forEach(k => { buses[k].gain.cancelScheduledValues(t); buses[k].gain.setTargetAtTime(m[k], t, tc); });
+  }
+  function enable() {
+    try { if (!ctx) build(); } catch (e) { return false; }
+    on = true; ctx.resume();
+    const t = ctx.currentTime; master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(1, t, .6);
+    setMix(true); remember(true); return true;
+  }
+  function disable() {
+    on = false; remember(false);
+    if (ctx) { const t = ctx.currentTime; master.gain.cancelScheduledValues(t); master.gain.setTargetAtTime(0, t, .15); }
+  }
+  document.addEventListener("visibilitychange", () => { if (!ctx) return; if (document.hidden) ctx.suspend(); else if (on) ctx.resume(); });
   return {
-    toggle() {
-      try { if (!ctx) build(); } catch (e) { return false; }
-      on = !on; const t = ctx.currentTime;
-      master.gain.cancelScheduledValues(t);
-      if (on) { ctx.resume(); master.gain.setTargetAtTime(1, t, .7); } else master.gain.setTargetAtTime(0, t, .2);
-      return on;
-    },
-    isOn: () => on,
-    click() { burst("bandpass", 2600, 1.6, .14, .003, .05); },
-    thunder() { burst("lowpass", 120, .6, .5, .4, 3.6); },
-    thud() {
-      if (!on || !ctx) return;
-      const o = ctx.createOscillator(), g = ctx.createGain(), t = ctx.currentTime;
-      o.frequency.setValueAtTime(120, t); o.frequency.exponentialRampToValueAtTime(40, t + .25);
-      g.gain.setValueAtTime(.4, t); g.gain.exponentialRampToValueAtTime(.0001, t + .35);
-      o.connect(g); g.connect(master); o.start(t); o.stop(t + .4);
-      burst("lowpass", 900, .6, .22, .003, .12);
+    toggle() { if (on) disable(); else enable(); return on; },
+    enable, isOn: () => on, wants: () => want && !on,
+    scene(name) { scene = name; if (on) setMix(false); },
+    page() { if (!play("page", .7)) tap(1800, .8, .08, .25); },
+    open() { if (!play("open", .8)) tap(2400, 1.2, .1, .08); },
+    stamp() { if (!play("stamp", 1)) tap(160, .7, .5, .3); tap(900, .6, .12, .12); },
+    click() { tap(2600, 1.6, .09, .05); },
+    wrong() { tap(320, 2, .22, .18); },
+    thunder() {
+      if (!on) return;
+      const pick = ["t1", "t2", "t3"].filter(k => buf[k]);
+      if (!pick.length) { tap(110, .6, .4, 3.4); return; }
+      const k = pick[Math.floor(Math.random() * pick.length)];
+      if (scene === "cover") play(k, .9);
+      else { const f = filt("lowpass", 650, .5); f.connect(master); play(k, scene === "apartment" ? 1 : .8, f); }
     }
   };
 })();
@@ -717,7 +918,11 @@ function syncSound() {
   const on = Sound.isOn();
   $$(".sound").forEach(b => { b.classList.toggle("on", on); b.setAttribute("aria-pressed", on ? "true" : "false"); b.querySelector(".sound-l").textContent = on ? "Sound on" : "Sound off"; });
 }
-$$(".sound").forEach(b => b.addEventListener("click", () => { Sound.toggle(); syncSound(); }));
+$$(".sound").forEach(b => b.addEventListener("click", e => { e.stopPropagation(); Sound.toggle(); syncSound(); }));
+if (Sound.wants()) {
+  const wake = e => { window.removeEventListener("pointerdown", wake, true); window.removeEventListener("keydown", wake, true); if (e.target && e.target.closest && e.target.closest(".sound")) return; Sound.enable(); syncSound(); };
+  window.addEventListener("pointerdown", wake, true); window.addEventListener("keydown", wake, true);
+}
 
 /* ---------- Art: case scenes ---------- */
 const TX = (x, y, s, txt, o = {}) => `<text x="${x}" y="${y}" text-anchor="${o.a || "middle"}" font-family="${o.f || "Nanum Pen Script, cursive"}" font-size="${o.f ? s : Math.round(s * 1.38)}" font-weight="${o.w || 400}" fill="${o.c || "#EEE5CF"}"${o.op ? ` opacity="${o.op}"` : ""}>${txt}</text>`;
@@ -893,9 +1098,9 @@ function mapSVG() {
 function coverLayers() {
   const sky = `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
     <defs>
-      <linearGradient id="cs-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#04070C"/><stop offset=".34" stop-color="#0A101A"/><stop offset=".54" stop-color="#121A27"/><stop offset=".64" stop-color="#262833"/><stop offset=".7" stop-color="#3A3130"/></linearGradient>
-      <radialGradient id="cs-haze"><stop offset="0" stop-color="#2A303C" stop-opacity=".7"/><stop offset="1" stop-color="#2A303C" stop-opacity="0"/></radialGradient>
-      <radialGradient id="cs-cloud"><stop offset="0" stop-color="#1E2531" stop-opacity=".8"/><stop offset=".6" stop-color="#1E2531" stop-opacity=".35"/><stop offset="1" stop-color="#1E2531" stop-opacity="0"/></radialGradient>
+      <linearGradient id="cs-sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#030907"/><stop offset=".34" stop-color="#071411"/><stop offset=".54" stop-color="#0D1D19"/><stop offset=".64" stop-color="#1F2C27"/><stop offset=".7" stop-color="#343328"/></linearGradient>
+      <radialGradient id="cs-haze"><stop offset="0" stop-color="#22322B" stop-opacity=".7"/><stop offset="1" stop-color="#22322B" stop-opacity="0"/></radialGradient>
+      <radialGradient id="cs-cloud"><stop offset="0" stop-color="#1A2A24" stop-opacity=".8"/><stop offset=".6" stop-color="#1A2A24" stop-opacity=".35"/><stop offset="1" stop-color="#1A2A24" stop-opacity="0"/></radialGradient>
       <radialGradient id="cs-moon"><stop offset="0" stop-color="#E4E8EE" stop-opacity=".55"/><stop offset=".18" stop-color="#B9C4D4" stop-opacity=".2"/><stop offset="1" stop-color="#B9C4D4" stop-opacity="0"/></radialGradient>
       <radialGradient id="cs-sun"><stop offset="0" stop-color="#C9905A" stop-opacity=".32"/><stop offset=".5" stop-color="#8A6A50" stop-opacity=".12"/><stop offset="1" stop-color="#8A6A50" stop-opacity="0"/></radialGradient>
     </defs>
@@ -913,16 +1118,16 @@ function coverLayers() {
   </svg>`;
   let lights = "";
   for (let i = 0; i < 28; i++) { const x = 40 + i * 56 + (i % 3) * 9, y = 602 + (i % 4) * 2; if (x > 880 && x < 1080) continue; lights += `<circle cx="${x}" cy="${y}" r="${2 + (i % 3)}" fill="${i % 7 === 3 ? "#CFE0FF" : "#FFC56A"}"/>`; }
-  const cranes = [1170, 1300, 1420].map((x, i) => { const yb = 470 - i * 10; return `<g stroke="#1A212B" fill="none"><path d="M${x} 600 V${yb} M${x + 40} 600 V${yb} M${x} 540 H${x + 40} M${x} 540 L${x + 40} 600 M${x - 130} ${yb} H${x + 80}" stroke-width="6"/><path d="M${x + 20} ${yb} V${yb - 46} M${x + 20} ${yb - 46} L${x - 130} ${yb} M${x + 20} ${yb - 46} L${x + 80} ${yb}" stroke-width="2.5"/><path d="M${x - 70} ${yb} v26" stroke-width="2"/><rect x="${x - 78}" y="${yb + 26}" width="16" height="8" fill="#1A212B" stroke="none"/><circle class="blink" style="animation-delay:${i * .7}s" cx="${x + 20}" cy="${yb - 48}" r="3.5" fill="#FF3B2A" stroke="none"/></g>`; }).join("");
+  const cranes = [1170, 1300, 1420].map((x, i) => { const yb = 470 - i * 10; return `<g stroke="#17231E" fill="none"><path d="M${x} 600 V${yb} M${x + 40} 600 V${yb} M${x} 540 H${x + 40} M${x} 540 L${x + 40} 600 M${x - 130} ${yb} H${x + 80}" stroke-width="6"/><path d="M${x + 20} ${yb} V${yb - 46} M${x + 20} ${yb - 46} L${x - 130} ${yb} M${x + 20} ${yb - 46} L${x + 80} ${yb}" stroke-width="2.5"/><path d="M${x - 70} ${yb} v26" stroke-width="2"/><rect x="${x - 78}" y="${yb + 26}" width="16" height="8" fill="#17231E" stroke="none"/><circle class="blink" style="animation-delay:${i * .7}s" cx="${x + 20}" cy="${yb - 48}" r="3.5" fill="#FF3B2A" stroke="none"/></g>`; }).join("");
   const far = `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
     <defs>
       <linearGradient id="cs-fog" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#C8A880" stop-opacity="0"/><stop offset=".5" stop-color="#C8A880" stop-opacity=".1"/><stop offset="1" stop-color="#C8A880" stop-opacity="0"/></linearGradient>
       <radialGradient id="cs-flare"><stop offset="0" stop-color="#FFE0A0" stop-opacity=".9"/><stop offset=".3" stop-color="#FF8A30" stop-opacity=".4"/><stop offset="1" stop-color="#FF8A30" stop-opacity="0"/></radialGradient>
       <filter id="cs-blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="4"/></filter>
     </defs>
-    <path class="far-land" d="M0 580 C160 566 300 574 420 568 C560 560 700 576 860 570 C1040 562 1200 576 1380 568 C1480 564 1560 570 1600 568 V900 H0 Z" fill="#0E131A" opacity=".96"/>
+    <path class="far-land" d="M0 580 C160 566 300 574 420 568 C560 560 700 576 860 570 C1040 562 1200 576 1380 568 C1480 564 1560 570 1600 568 V900 H0 Z" fill="#0A1410" opacity=".96"/>
     ${cranes}
-    <g opacity=".95"><path d="M262 600 V420 H280 V600 Z" fill="#131820"/><path d="M300 600 V470 H312 V600 Z" fill="#131820"/><path d="M232 600 V520 H246 V600 Z" fill="#131820"/></g>
+    <g opacity=".95"><path d="M262 600 V420 H280 V600 Z" fill="#111C17"/><path d="M300 600 V470 H312 V600 Z" fill="#111C17"/><path d="M232 600 V520 H246 V600 Z" fill="#111C17"/></g>
     <circle cx="271" cy="410" r="60" fill="url(#cs-flare)"/>
     <path class="flare" d="M271 418 C261 404 264 392 271 380 C278 392 281 404 271 418 Z" fill="#FFB24A"/>
     <path class="smoke" d="M300 470 C340 430 420 420 500 400 C580 380 660 384 740 360 L740 376 C660 400 580 398 500 418 C420 438 350 444 310 478 Z" fill="#6A4A34" opacity=".3"/>
@@ -942,13 +1147,13 @@ function coverLayers() {
     <path d="M600 500 Q700 530 800 470 L790 540 Q720 575 640 560 Z" fill="url(#cs-net)" stroke="${fill}" stroke-width="3"/>`;
   const water = `<svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice">
     <defs>
-      <linearGradient id="cs-water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2A2A30"/><stop offset=".25" stop-color="#121822"/><stop offset="1" stop-color="#05070A"/></linearGradient>
+      <linearGradient id="cs-water" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#22302A"/><stop offset=".25" stop-color="#0E1916"/><stop offset="1" stop-color="#040907"/></linearGradient>
       <pattern id="cs-net" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M0 0 L10 10 M10 0 L0 10" stroke="#0E0A06" stroke-width="1.1"/></pattern>
     </defs>
     <rect y="604" width="1600" height="296" fill="url(#cs-water)"/>
     <g class="shimmer">${shimmer}</g>
     <g opacity=".3">${Array.from({ length: 12 }, (_, i) => { const x = 420 + i * 98 + (i % 3) * 17; return `<rect x="${x}" y="612" width="3" height="${36 + (i % 4) * 16}" fill="${i % 5 === 2 ? "#CFE0FF" : "#FFC56A"}"/>`; }).join("")}</g>
-    <g transform="translate(1260 170) scale(.5)" opacity=".75">${netPath("#141A22", 6)}</g>
+    <g transform="translate(1260 170) scale(.5)" opacity=".75">${netPath("#12201A", 6)}</g>
     ${netPath("#0E0A06", 8)}
     <path d="M760 700 C800 712 900 712 960 700 L948 708 C900 718 810 718 772 708 Z" fill="#0E0A06"/>
     <path d="M864 704 V650 M864 650 l-6 -14 h12 Z" stroke="#0E0A06" stroke-width="5" fill="#0E0A06"/>
@@ -1046,41 +1251,37 @@ const CASES = [
   {
     id: "vanishing", n: 1, role: "Product manager", stamp: "2022",
     title: "The vanishing learners",
-    teaser: "People sign up for the new skilling courses, look around, and leave.",
-    cap: "Kochi, 2022. 11:40 pm. Entri is learning to teach skills, not only exams.",
+    teaser: "People sign up for our new skilling courses, look around, and leave.",
+    cap: "Kochi, 2022. 11:40 pm. Entri is learning to teach skills, not just exams.",
     alt: "A phone glowing on a dark desk, asking the user to pick an exam, while a thought bubble says: I want to learn to code.",
     scene: "vanishing",
-    intro: [
-      { n: "For years, Entri has helped people prepare for government exams in their own language. Now it is adding skilling courses, for people who want a new career rather than a rank on a list." },
-      { p: "Growth team", t: "The new courses bring people in. They sign up, look around, and then they’re gone." },
+    brief: [
+      { n: "For years, Entri helped people prepare for government exams in their own language. In 2022 we started adding skilling courses, for people who wanted a new career rather than a rank on a list." },
+      { p: "Growth team", t: "The new courses bring people in. They sign up, look around, and they’re gone." },
       { v: "pattern", c: "Easy: success", t: "People don’t leave at random. Find the screen where they stop." }
     ],
-    probes: [
-      { label: "Sign up as someone who wants to learn to code", lines: [
-        { n: "You install the app fresh and walk in the way a would-be developer would." },
-        { n: "The first questions assume you’re preparing for an exam. The categories you can choose from are built around exam preparation." },
-        { v: "empathy", c: "Medium: success", t: "Someone who wants to become a developer can’t find themselves on this screen." }
-      ], clue: { t: "Signup and category selection speak to exam aspirants.", key: true } },
-      { label: "Open one of the skilling courses", lines: [
-        { n: "The course sits inside the exam-prep structure. It is arranged the way an exam course is, because that is the only shape the product has." },
-        { v: "pattern", c: "Medium: success", t: "Same thing as signup. One product shape, and these learners don’t fit it." }
-      ], clue: { t: "Skilling courses run on the exam-prep product structure.", key: true } },
-      { label: "Check whether the ads bring in the wrong people", lines: [
-        { n: "The campaigns reach people interested in careers and skills. Installs arrive at about the rate expected." },
+    evidence: [
+      { title: "Sign up as a would-be developer", lines: [
+        { n: "I installed the app fresh and walked in the way someone who wants to learn to code would. The first questions assumed I was preparing for an exam, and every category was built around exam prep." },
+        { v: "empathy", c: "Medium: success", t: "A would-be developer can’t find themselves on this screen." }
+      ], clue: { t: "Signup and categories speak only to exam aspirants.", key: true } },
+      { title: "Open one of the skilling courses", lines: [
+        { n: "The course sat inside the exam-prep structure, arranged the way an exam course is, because that was the only shape the product had." },
+        { v: "pattern", c: "Medium: success", t: "Same as signup. One product shape, and these learners don’t fit it." }
+      ], clue: { t: "Skilling courses run on the exam-prep structure.", key: true } },
+      { title: "Check the ad campaigns", lines: [
+        { n: "The campaigns reached people interested in careers and skills. Installs arrived at about the rate we expected." },
         { v: "instr", t: "People are arriving. Acquisition isn’t where they’re lost." }
       ], clue: { t: "Acquisition looks healthy.", key: false } }
     ],
-    deduce: { q: "Why are the new learners vanishing?", options: [
-      { t: "The ads are bringing in the wrong people.", r: [{ v: "instr", t: "The campaigns check out. The right people are arriving, into an app built for someone else." }] },
-      { t: "The app was built for exam aspirants, and skilling learners can’t find themselves in it.", ok: true },
-      { t: "The courses are priced too high.", r: [{ v: "empathy", t: "Nothing you’ve seen points at price. They stop at the very first screens." }] }
+    call: { q: "So what did I do?", options: [
+      { t: "Changed the ad targeting to bring in better-fit people.", hint: { v: "instr", t: "The campaigns checked out. The right people were arriving, into an app built for someone else." } },
+      { t: "Rebuilt signup and onboarding for skilling, and gave those courses a structure of their own.", ok: true },
+      { t: "Cut the prices of the new courses.", hint: { v: "empathy", t: "Nothing points at price. They left at the very first screens." } }
     ] },
-    solve: [
-      { v: "first", c: "Critical success", t: "Start from the learner, not from the structure you already have. Two kinds of learners need two structures." },
-      { n: "You rework signup, onboarding and category selection for the new verticals, and design a product structure made for skilling." }
-    ],
+    solve: [{ v: "first", c: "Critical success", t: "Start from the learner, not the structure you already have. Two kinds of learners, two structures." }],
     verdict: {
-      did: ["Reworked signup, onboarding and category selection for Entri’s new skilling verticals.", "Designed the in-app product structure for skilling courses, which had been running on the exam-prep structure. It was later carried into Elevate, the cohort model that runs Entri’s live classes."],
+      did: ["Reworked signup, onboarding and category selection for the new skilling verticals.", "Designed a product structure made for skilling courses, which had been running on the exam-prep one. It later became the base for Elevate, Entri’s cohort model for live classes."],
       outcome: "Signups and activation for the new verticals both went up.",
       links: [],
       thought: { name: "Strong opinions, loosely held", t: "The exam-prep structure had worked for years. That made it the default, and defaults deserve a second look." },
@@ -1094,78 +1295,72 @@ const CASES = [
     cap: "Kochi, 2024. 1:15 am. Hours of lectures, and a dashboard that says all is well.",
     alt: "A laptop in a dark room playing a recorded lecture, with a fast-forward symbol and a glowing 2x speed badge.",
     scene: "speed",
-    intro: [
-      { n: "Entri’s courses run on recorded lectures. Hours and hours of them. On the dashboard, watch time looks fine." },
-      { v: "instr", c: "Medium: success", t: "Watch time counts minutes. It doesn’t tell you what kind of minutes they were." }
+    brief: [
+      { n: "Entri’s courses ran on recorded lectures, hours and hours of them. On the dashboard, watch time looked fine." },
+      { v: "instr", c: "Medium: success", t: "Watch time counts minutes. It doesn’t say what kind of minutes they were." }
     ],
-    probes: [
-      { label: "Look at how people actually watch", lines: [
-        { n: "You go past the totals and into how the videos are played. A lot of learners are watching at 2x speed." },
+    evidence: [
+      { title: "Look at how people actually watch", lines: [
+        { n: "I went past the totals and into how the videos were played. A lot of learners were watching at 2x." },
         { v: "pattern", c: "Challenging: success", t: "Nobody watches a lecture at double speed because they love it. They’re hunting for something." }
-      ], clue: { t: "Learners are watching lectures at 2x.", key: true } },
-      { label: "Sit in a learner’s seat", lines: [
-        { n: "An hour-long lecture. One concept you don’t get. You skim for it, and when you find it, it isn’t explained the way you need." },
-        { v: "empathy", c: "Medium: success", t: "You’re stuck, and the video can’t answer back. A lecture is a one-way street." }
+      ], clue: { t: "Learners watch lectures at 2x.", key: true } },
+      { title: "Sit in a learner’s seat", lines: [
+        { n: "An hour-long lecture. One concept I didn’t get. I skimmed for it, and when I found it, it wasn’t explained the way I needed." },
+        { v: "empathy", c: "Medium: success", t: "Stuck, and the video can’t answer back. A lecture is a one-way street." }
       ], clue: { t: "A lecture can’t answer a doubt.", key: true } },
-      { label: "Price out re-shooting everything as shorter videos", lines: [
-        { n: "Re-shooting the catalogue in short cuts would take months and a studio budget." },
-        { v: "first", c: "Medium: success", t: "Shorter is still one-way. The real problem is that a video can’t answer back." }
-      ], clue: { t: "Re-shooting the catalogue would be slow and expensive.", key: false } }
+      { title: "Price out re-shooting shorter videos", lines: [
+        { n: "Re-shooting the catalogue as short clips would take months and a studio budget." },
+        { v: "first", c: "Medium: success", t: "Shorter is still one-way." }
+      ], clue: { t: "Re-shooting would be slow and expensive.", key: false } }
     ],
-    deduce: { q: "What do the 2x learners actually need?", options: [
-      { t: "Shorter videos.", r: [{ v: "first", t: "Shorter doesn’t fix one-way." }] },
-      { t: "More reminders to finish their lectures.", r: [{ v: "empathy", t: "They’re already trying to get through faster. Nagging won’t help." }] },
-      { t: "A way to skim a lecture, and to ask it questions.", ok: true }
+    call: { q: "So what did I do?", options: [
+      { t: "Re-shot the lectures as short videos.", hint: { v: "first", t: "Shorter doesn’t fix one-way." } },
+      { t: "Sent more reminders to finish lectures.", hint: { v: "empathy", t: "They were already trying to get through faster. Nagging wouldn’t help." } },
+      { t: "Pitched AI summaries to skim, and a copilot you can ask questions inside the video.", ok: true }
     ] },
-    solve: [
-      { v: "audacity", c: "Medium: success", t: "What’s the worst that can happen? Pitch it." },
-      { n: "You pitch AI summaries for every lecture, and a copilot that answers doubts inside the video." }
-    ],
+    solve: [{ v: "audacity", c: "Medium: success", t: "What’s the worst that can happen? Pitch it." }],
     verdict: {
-      did: ["Noticed learners were watching lectures at 2x, and pitched the fix: Smart Videos, the AI Video Copilot.", "Turned static lectures into interactive video, with AI summaries to skim and an in-video copilot that answers doubts mid-lecture."],
-      outcome: "Engagement with lectures rose sharply. The product was showcased at Google Playtime and in an Android Developers case study.",
+      did: ["Spotted the 2x pattern and pitched the fix: Smart Videos, an AI video copilot.", "Turned static lectures into interactive video, with AI summaries to skim and a copilot that answers doubts mid-lecture."],
+      outcome: "Lecture engagement rose sharply. It was showcased at Google Playtime and in an Android Developers case study.",
       links: [{ t: "Android Developers case study (video)", u: "https://www.youtube.com/watch?v=zpAy91KUkfg" }],
-      thought: { name: "Ship to learn", t: "A playback setting was enough evidence to start. The rest was learned by shipping." },
+      thought: { name: "Ship to learn", t: "A playback setting was enough evidence to start. The rest I learned by shipping." },
       pattern: "Behaviour said what nobody had said out loud."
     }
   },
   {
     id: "nervous", n: 3, role: "Senior product manager", stamp: "2025",
     title: "The nervous candidate",
-    teaser: "The course is finished. The interview is where it falls apart.",
+    teaser: "The course is done. The interview is where it falls apart.",
     cap: "An interview room. 10:02 am. The app has never been inside one.",
     alt: "A single hanging lamp over an interview table with two empty chairs. One speech bubble says: So, tell me about yourself. The other says: Um.",
     scene: "nervous",
-    intro: [
+    brief: [
       { n: "A learner finishes a skilling course. Certificate in hand, the next step is a job interview." },
-      { n: "The course taught the skill. Nobody has practised saying it out loud, to a stranger, across a table." },
+      { n: "The course taught the skill. Nobody had practised saying it out loud, to a stranger, across a table." },
       { v: "empathy", c: "Easy: success", t: "Knowing an answer and saying it under pressure are two different skills." }
     ],
-    probes: [
-      { label: "Follow a learner past the certificate", lines: [
-        { n: "For the product, completion is the finish line. For the learner, it’s halfway. The real test is an interview the app never sees." },
+    evidence: [
+      { title: "Follow a learner past the certificate", lines: [
+        { n: "For the product, completion was the finish line. For the learner it was halfway. The real test was an interview the app never saw." },
         { v: "first", c: "Medium: success", t: "What does the learner actually want? A job. The finish line is in the wrong place." }
-      ], clue: { t: "The learner’s real goal sits after the course: the interview.", key: true } },
-      { label: "Look at what practice with real interviewers would cost", lines: [
+      ], clue: { t: "The real goal sits after the course: the interview.", key: true } },
+      { title: "Price out real mock interviews", lines: [
         { n: "Mock interviews with people work. They don’t scale to every learner at a price learners can pay." },
-        { v: "audacity", c: "Medium: success", t: "So let a machine do the asking. As many times as they want." }
-      ], clue: { t: "Practice with human interviewers works but doesn’t scale.", key: true } },
-      { label: "Add a module of interview tips to the course", lines: [
+        { v: "audacity", c: "Medium: success", t: "So let a machine do the asking, as many times as they want." }
+      ], clue: { t: "Human mock interviews work but don’t scale.", key: true } },
+      { title: "Consider an interview-tips module", lines: [
         { n: "Another chapter of advice. Read it, nod, forget it before the interview." },
         { v: "empathy", t: "Tips don’t calm nerves. Practice does." }
-      ], clue: { t: "Interview tips are easy to add and easy to forget.", key: false } }
+      ], clue: { t: "Tips are easy to add and easy to forget.", key: false } }
     ],
-    deduce: { q: "What will actually get them ready?", options: [
-      { t: "Unlimited practice: AI mock interviews with feedback, as often as they need.", ok: true },
-      { t: "A badge for finishing the course.", r: [{ v: "empathy", t: "A badge doesn’t help anyone answer a question." }] },
-      { t: "More reading on how to interview.", r: [{ v: "empathy", t: "Reading about an interview doesn’t make the next one less frightening." }] }
+    call: { q: "So what did I do?", options: [
+      { t: "Built an AI mock interviewer: unlimited practice, with feedback.", ok: true },
+      { t: "Added a badge for finishing the course.", hint: { v: "empathy", t: "A badge doesn’t help anyone answer a question." } },
+      { t: "Added more reading on how to interview.", hint: { v: "empathy", t: "Reading about an interview doesn’t make the next one less frightening." } }
     ] },
-    solve: [
-      { v: "pattern", c: "Medium: success", t: "Same story every time. The course ends, the nerves start, and the app isn’t there for it. Move the finish line." },
-      { n: "You build an AI mock interviewer. Learners practise, get feedback, and come back for another round." }
-    ],
+    solve: [{ v: "pattern", c: "Medium: success", t: "Same story every time: the course ends, the nerves start, and the app isn’t there. Move the finish line." }],
     verdict: {
-      did: ["Built Interview Coach, an AI mock interview product. Learners practise interviews with an AI interviewer and get feedback on their answers."],
+      did: ["Built Interview Coach, an AI mock interviewer. Learners practise interviews and get feedback on their answers."],
       outcome: "Almost every eligible learner used it, and the ones who did kept coming back weeks later.",
       links: [],
       thought: { name: "Probability over motivation", t: "Confidence comes from reps, not pep talks. More practice, better odds." },
@@ -1175,40 +1370,37 @@ const CASES = [
   {
     id: "funnel", n: 4, role: "Director of product", stamp: "2026",
     title: "The lying funnel",
-    teaser: "The plan is to buy more installs. The funnel disagrees, if you can trust it.",
+    teaser: "The plan was to buy more installs. The funnel disagreed, once I could trust it.",
     cap: "Kochi, monsoon 2026. 9:30 pm. Four stages, and a theory everyone already likes.",
     alt: "A hand-drawn funnel of install, signup, lead and sale on paper under a lamp, with the signup stage circled in red and a magnifying glass beside it.",
     scene: "funnel",
-    intro: [
-      { n: "The company wants more learners coming through the app. The working theory in the room: there aren’t enough installs. Buy more." },
+    brief: [
+      { n: "We wanted more learners coming through the app. The theory in the room: not enough installs, so buy more." },
       { v: "instr", c: "Medium: success", t: "Before anyone spends money, check that the funnel is telling the truth." }
     ],
-    probes: [
-      { label: "Lay the funnel out stage by stage", lines: [
-        { n: "Install, signup, lead, sale. You put the stage-to-stage rates side by side." },
-        { v: "pattern", c: "Challenging: success", t: "Installs aren’t the weakest stage. The bigger leak is after signup. People sign up and never become a lead." }
-      ], clue: { t: "Signup to lead leaks more than acquisition does.", key: true } },
-      { label: "Read the event definitions behind the dashboard", lines: [
-        { n: "You open the tracking plan. The lead event fires when someone visits a screen, whether they meant anything by it or not. The signup event misses everyone who comes in through the login path. Some cohorts are defined wrong." },
+    evidence: [
+      { title: "Lay the funnel out, stage by stage", lines: [
+        { n: "Install, signup, lead, sale. I put the stage-to-stage rates side by side." },
+        { v: "pattern", c: "Challenging: success", t: "Installs aren’t the weakest stage. The bigger leak is after signup." }
+      ], clue: { t: "Signup to lead leaks more than acquisition.", key: true } },
+      { title: "Read the event definitions", lines: [
+        { n: "In the tracking plan, the lead event fired whenever someone visited a screen, meant or not. The signup event missed everyone who came in through login. Some cohorts were defined wrong." },
         { v: "instr", c: "Formidable: success", t: "The dashboard was lying before the users were." }
-      ], clue: { t: "The lead event counts visits, not intent. The signup event undercounts.", key: true } },
-      { label: "Blame the paid campaigns", lines: [
-        { n: "The paid campaign mix did change over the same weeks. Part of the dip is the mix, not the product." },
+      ], clue: { t: "The lead event counted visits, not intent.", key: true } },
+      { title: "Check the paid campaigns", lines: [
+        { n: "The paid mix changed over the same weeks. Part of the dip was the mix, not the product." },
         { v: "pattern", t: "Separate the two before engineering builds anything." }
-      ], clue: { t: "Part of the dip is a paid mix shift, not a product regression.", key: false } }
+      ], clue: { t: "Part of the dip was a paid mix shift.", key: false } }
     ],
-    deduce: { q: "Where is the real problem?", options: [
-      { t: "We need more installs.", r: [{ v: "instr", t: "Installs were the healthier stage. More of them would pour into the same leak." }] },
-      { t: "The leak is between signup and lead, and the metrics were hiding it. Fix the measurement, then the funnel.", ok: true },
-      { t: "The new campaigns broke the product.", r: [{ v: "pattern", t: "The mix explains part of the dip. It doesn’t explain the leak after signup." }] }
+    call: { q: "So what did I do?", options: [
+      { t: "Bought more installs.", hint: { v: "instr", t: "Installs were the healthier stage. More of them would pour into the same leak." } },
+      { t: "Fixed the measurement first, then moved the focus to the signup-to-lead leak.", ok: true },
+      { t: "Rolled back the new campaigns.", hint: { v: "pattern", t: "The mix explained part of the dip, not the leak after signup." } }
     ] },
-    solve: [
-      { v: "instr", c: "Critical success", t: "Make the number trustworthy, then move it." },
-      { n: "You take the evidence to leadership. The priority moves from buying installs to getting signed-up learners to a lead." }
-    ],
+    solve: [{ v: "instr", c: "Critical success", t: "Make the number trustworthy, then move it." }],
     verdict: {
-      did: ["Ran a full funnel baseline across signup, category selection, notification campaigns and early retention.", "Showed that the signup-to-lead stage, not app acquisition, was the larger leak, which reframed the company’s priority.", "Found and fixed the measurement underneath it: a lead event firing on screen visits instead of intent, a signup event that missed the login path, and cohort definition errors.", "Separated a paid mix shift from genuine product regression before any engineering time was committed."],
-      outcome: "The app priority moved from acquisition to signup-to-lead conversion, tracked on numbers the team could trust.",
+      did: ["Ran a full funnel baseline across signup, category selection, notifications and early retention.", "Showed that the signup-to-lead stage, not acquisition, was the bigger leak, which changed the company’s priority.", "Fixed the measurement underneath: a lead event firing on visits instead of intent, a signup event missing the login path, and cohort definitions.", "Separated a paid mix shift from a real product regression before any engineering time went in."],
+      outcome: "The app’s priority moved from acquisition to signup-to-lead, tracked on numbers the team could trust.",
       links: [],
       thought: { name: "Tractable metrics first", t: "A number you can’t trust is a number you can’t move on purpose." },
       pattern: "The dashboard was lying before the users were."
@@ -1221,37 +1413,34 @@ const CASES = [
     cap: "Kochi, 2026. 7:05 pm. A weekly experiment email, and a great many wins.",
     alt: "Three glowing lab flasks with flags that say Win, under a monitor where the company numbers run as a flat line.",
     scene: "lab",
-    intro: [
-      { n: "Entri runs experiments. You know this better than anyone, because you built the system they run on: templates, pre-registration, prioritisation, and a weekly email of what’s live." },
-      { n: "Squads keep reporting wins. The company’s numbers barely move." },
+    brief: [
+      { n: "I built Entri’s experimentation system: templates, pre-registration, prioritisation, and a weekly email of what’s live." },
+      { n: "Squads kept reporting wins. The company’s numbers barely moved." },
       { v: "pattern", c: "Medium: success", t: "If every experiment wins and nothing changes, the experiments are the suspect." }
     ],
-    probes: [
-      { label: "Audit last quarter’s experiments", lines: [
-        { n: "Many ran on user slices too small to tell a real effect from noise. Several changed three things at once, so nobody can say which one worked." },
+    evidence: [
+      { title: "Audit last quarter’s experiments", lines: [
+        { n: "Many ran on slices too small to tell a real effect from noise. Several changed three things at once, so nobody could say which one worked." },
         { v: "instr", c: "Challenging: success", t: "Underpowered and tangled. Half these wins are coin flips." }
-      ], clue: { t: "Tests run on slices too small to power, with poor variable isolation.", key: true } },
-      { label: "Follow a winning variant after the test ends", lines: [
-        { n: "The squad that ran it shipped it in its own corner of the app. Its own metric went up. No other team picked it up, and the company number stayed where it was." },
+      ], clue: { t: "Tests too small to trust, and tangled.", key: true } },
+      { title: "Follow a winner after the test", lines: [
+        { n: "The squad shipped it in its own corner of the app. Its own metric went up. No other team picked it up, and the company number stayed put." },
         { v: "pattern", c: "Medium: success", t: "Local metrics, local wins. Nothing travels." }
-      ], clue: { t: "Squads optimise local metrics, and wins never scale past the squad.", key: true } },
-      { label: "Roll a stricter framework out to every squad at once", lines: [
-        { n: "The squads push back. Daily tracking feels like overhead, and a new process landing in the middle of their work doesn’t feel fair." },
-        { v: "empathy", c: "Medium: success", t: "They understand the framework fine. They didn’t get a say in when it arrived. That’s a rollout problem, not a comprehension problem." }
+      ], clue: { t: "Wins never travel past the squad.", key: true } },
+      { title: "Roll stricter rules out everywhere", lines: [
+        { n: "The squads pushed back. Daily tracking felt like overhead, and a new process landing mid-quarter didn’t feel fair." },
+        { v: "empathy", c: "Medium: success", t: "They get the framework. They didn’t get a say in when it arrived." }
       ], clue: { t: "The pushback is about the rollout, not the idea.", key: true } }
     ],
-    deduce: { q: "What’s actually broken?", options: [
-      { t: "The squads aren’t trying hard enough.", r: [{ v: "empathy", t: "That’s the fundamental attribution error. Look at the situation before you blame the person." }] },
-      { t: "Not enough experiments. Run more.", r: [{ v: "instr", t: "More underpowered tests means more fake wins." }] },
-      { t: "The operating model. Tests too small to trust, and wins that never travel. Fix the system, and roll it out one squad at a time.", ok: true }
+    call: { q: "So what did I do?", options: [
+      { t: "Asked the squads to try harder.", hint: { v: "empathy", t: "That’s the fundamental attribution error. Look at the situation before you blame people." } },
+      { t: "Ran more experiments.", hint: { v: "instr", t: "More underpowered tests, more fake wins." } },
+      { t: "Redesigned the operating model, and rolled it out one squad at a time.", ok: true }
     ] },
-    solve: [
-      { v: "first", c: "Critical success", t: "Back to basics. A win has to be real, and it has to travel. Fix the system that decides both." },
-      { n: "You redesign the operating model across squads, and start with one squad instead of all of them." }
-    ],
+    solve: [{ v: "first", c: "Critical success", t: "Back to basics. A win has to be real, and it has to travel. Fix the system that decides both." }],
     verdict: {
-      did: ["Built the company’s experimentation system from nothing: pre-registration gates, prioritisation and weekly experiment visibility.", "Diagnosed why it wasn’t paying off: experiments too small to power, poor variable isolation, teams optimising local metrics, and winning variants that never scaled past the squad that ran them.", "Redesigning the cross-squad operating model, and rolling it into one squad first after the pushback showed the constraint was rollout, not comprehension."],
-      outcome: "Work in progress. The redesigned model runs in one squad before it goes wider.",
+      did: ["Built the experimentation system from scratch: pre-registration, prioritisation and weekly visibility.", "Worked out why it wasn’t paying off: tests too small to power, tangled variables, local metrics, and wins that never scaled.", "Redesigning the cross-squad operating model, starting with one squad after the pushback showed the problem was the rollout."],
+      outcome: "Still in progress. The new model runs in one squad before it goes wider.",
       links: [],
       thought: { name: "Systems over heroics", t: "A great experiment inside a broken system is still wasted." },
       pattern: "Good results died inside a broken system."
@@ -1259,41 +1448,44 @@ const CASES = [
   }
 ];
 const FINAL = {
-  q: "Five cases. What does this detective keep finding?",
+  q: "Five cases. What’s the pattern in how I work?",
   options: [
-    { t: "He ships faster than everyone else.", r: [{ v: "pattern", t: "Speed was never the clue. In every case, the first move was to look closer." }] },
-    { t: "The real answer sits under the metric: in what users actually do, or in how the number is measured.", ok: true },
-    { t: "He’s good with AI.", r: [{ v: "pattern", t: "Two of the five cases used AI. All five started somewhere else." }] }
+    { t: "I ship faster than everyone else.", hint: { v: "pattern", t: "Speed was never the clue. In every case, the first move was to look closer." } },
+    { t: "The real answer sits under the metric: in what people actually do, or in how the number is measured.", ok: true },
+    { t: "I’m good with AI.", hint: { v: "pattern", t: "AI showed up in two cases. All five started somewhere else." } }
   ]
 };
 const OBJECTS = [
   { id: "window", name: "The window", where: "Left wall", t: "Rain on the glass, and the street going quiet." },
   { id: "writing", name: "The writing table", where: "Under the window", t: "Where the writing happens.", links: [{ t: "The blog", u: "https://sjaykh.in/blog/" }, { t: "Medium", u: "https://sjaykh.medium.com" }] },
-  { id: "roughbook", name: "The rough book", where: "On the writing table", t: "Ideas, sketches, half-thoughts. The public version is his wiki.", links: [{ t: "The wiki", u: "https://wiki.sjaykh.in" }] },
-  { id: "lamp", name: "The lamp", where: "Overhead", t: "Whatever he’s into right now.", links: [{ t: "Now", u: "https://sjaykh.in/now/" }] },
-  { id: "tv", name: "The TV", where: "On the stand", t: "Films and sitcoms. He’ll watch almost anything.", links: [{ t: "Letterboxd", u: "https://letterboxd.com/sjaykh/" }] },
+  { id: "roughbook", name: "The rough book", where: "On the writing table", t: "Ideas, sketches, half-thoughts. The public version is my wiki.", links: [{ t: "The wiki", u: "https://wiki.sjaykh.in" }] },
+  { id: "lamp", name: "The lamp", where: "Overhead", t: "Whatever I’m into right now.", links: [{ t: "Now", u: "https://sjaykh.in/now/" }] },
+  { id: "tv", name: "The TV", where: "On the stand", t: "Films and sitcoms. I’ll watch almost anything.", links: [{ t: "Letterboxd", u: "https://letterboxd.com/sjaykh/" }] },
   { id: "quote", name: "The framed quote", where: "Back wall", t: "Lines worth keeping.", links: [{ t: "Quotes", u: "https://sjaykh.in/quotes/" }] },
-  { id: "books", name: "The bookshelf", where: "Back wall", t: "Everything he’s read, shelved.", links: [{ t: "The library", u: "https://sjaykh.in/library/" }] },
+  { id: "books", name: "The bookshelf", where: "Back wall", t: "Everything I’ve read, shelved.", links: [{ t: "The library", u: "https://sjaykh.in/library/" }] },
   { id: "music", name: "The record player", where: "By the wall", t: "Something is always playing." },
-  { id: "laptop", name: "The laptop", where: "On the side table", t: "Side projects, always a few open.", links: [{ t: "Recommend him something", u: "https://recs.sjaykh.in" }, { t: "What he uses", u: "https://sjaykh.in/uses-this/" }] },
+  { id: "laptop", name: "The laptop", where: "On the side table", t: "Side projects, always a few open.", links: [{ t: "Recommend me something", u: "https://recs.sjaykh.in" }, { t: "What I use", u: "https://sjaykh.in/uses-this/" }] },
   { id: "phone", name: "The phone", where: "On the writing table", t: "Face up, on silent. Mostly." },
   { id: "gym", name: "The dumbbell", where: "On the floor", t: "Lifting, logged.", links: [{ t: "Hevy", u: "https://hevy.com/user/sjaykh" }] }
 ];
 const EXTRAS = [
   { area: "origin", href: "#origin", cls: "clip-card", label: "Origin file", title: "How it started", teaser: "Placement season, hundreds of cold emails, and one reply.", tilt: 1.3, cols: true },
-  { area: "apt", href: "#apartment", cls: "photo-card", label: "Off duty", title: "The apartment", teaser: "Who is he when he isn’t working? Step inside.", tilt: -1.8, art: true },
-  { area: "file", href: "#file", cls: "folder-card", label: "Case file", title: "The plain resume", teaser: "Everything on this board, as a one-page file.", tilt: 1.6 }
+  { area: "apt", href: "#apartment", cls: "photo-card", label: "Off duty", title: "My apartment", teaser: "Who I am when I’m not working. Step inside.", tilt: -1.8, art: true },
+  { area: "file", href: "#file", cls: "folder-card", label: "The boring version", title: "The plain resume", teaser: "Everything here, as a one-page resume.", tilt: 1.6 }
 ];
 const TILTS = [-1.8, 1.4, -1.1, 1.9, -1.4];
+const STEPS = ["The case", "The evidence", "Your call", "What I did"];
+const LETTERS = ["A", "B", "C"];
 
 /* ---------- Helpers ---------- */
 const solvedCount = () => CASES.filter(c => state.solved[c.id]).length;
+const nextCase = () => CASES.find(c => !state.solved[c.id]) || null;
 const link = l => `<a href="${l.u}" target="_blank" rel="noopener">${l.t}</a>`;
 function contactHTML() {
   const parts = [];
   if (CONTACT.email) parts.push(`<span class="sel">${CONTACT.email}</span><button type="button" class="copy" data-copy="${CONTACT.email}">Copy email</button>`);
   if (CONTACT.linkedin) parts.push(`<a href="${CONTACT.linkedin}" target="_blank" rel="noopener">LinkedIn</a>`);
-  if (!parts.length) parts.push(`Reach him through <a href="https://sjaykh.in" target="_blank" rel="noopener">sjaykh.in</a> or <a href="https://x.com/sjaykh" target="_blank" rel="noopener">@sjaykh on X</a>.`);
+  if (!parts.length) parts.push(`Find me at <a href="https://sjaykh.in" target="_blank" rel="noopener">sjaykh.in</a> or <a href="https://x.com/sjaykh" target="_blank" rel="noopener">@sjaykh on X</a>.`);
   return parts.join(" &middot; ");
 }
 let wordClock = 0;
@@ -1302,14 +1494,12 @@ function words(text) {
   return text.split(/(\s+)/).map(w => { if (!w.trim()) return w; const s = `<span class="w" style="animation-delay:${wordClock}ms">${w}</span>`; wordClock += 14; return s; }).join("");
 }
 function lineHTML(l) {
-  if (l.you) return `<p class="ln you"><span class="who">You</span>${words(l.you)}</p>`;
   if (l.v) return `<p class="ln voice v-${l.v}"><span class="who">${VOICES[l.v]}</span>${l.c ? `<span class="chk">[${l.c}]</span>` : ""}${words(l.t)}</p>`;
   if (l.p) return `<p class="ln npc"><span class="who">${l.p}</span>${words(l.t)}</p>`;
-  if (l.q) return `<p class="ln question">${words(l.q)}</p>`;
   return `<p class="ln">${words(l.n)}</p>`;
 }
-function addLines(lines, logSel = "#log", scroll = true) {
-  const log = $(logSel); if (!log) return null;
+function addLines(lines, log) {
+  if (!log) return null;
   log.classList.remove("instant");
   wordClock = 0;
   let first = null;
@@ -1318,51 +1508,52 @@ function addLines(lines, logSel = "#log", scroll = true) {
     const p = w.firstElementChild; log.appendChild(p); if (!first) first = p;
     wordClock += 140;
   });
-  if (scroll && first) nudge(first);
   return first;
 }
 function nudge(el) {
+  if (!el) return;
   const r = el.getBoundingClientRect();
-  if (r.top > innerHeight * .62) window.scrollBy({ top: r.top - innerHeight * .28, behavior: reduce ? "auto" : "smooth" });
+  if (r.top > innerHeight * .6 || r.top < 0) window.scrollBy({ top: r.top - innerHeight * .22, behavior: reduce ? "auto" : "smooth" });
 }
 let activeOpts = null;
-function renderOpts(box, opts) {
-  activeOpts = opts;
-  opts.forEach((o, i) => {
-    const b = document.createElement("button");
-    b.type = "button"; b.className = "choice" + (o.k ? " " + o.k : "");
-    b.innerHTML = `<span class="num">${i + 1}.</span><span>${o.t}</span>`;
-    b.addEventListener("click", () => { Sound.click(); o.f(); });
-    box.appendChild(b);
-  });
-}
 function flashbang() { if (reduce) return; const f = $("#flashbang"); f.classList.remove("go"); void f.offsetWidth; f.classList.add("go"); }
+const ARROW = `<svg viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M3 8h9M8.5 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+function playHref() { const n = nextCase(); if (n) return "#case-" + n.id; return state.final ? "#board" : "#deduction"; }
+function playLabel() {
+  const n = nextCase(), k = solvedCount();
+  if (!n) return state.final ? "Replay any case" : "Final question";
+  return k ? `Continue: Case ${n.n}` : "Start with case 1";
+}
 
-/* ---------- Board ---------- */
+/* ---------- Board (all cases) ---------- */
 function renderBoard() {
   const cork = $("#cork");
   cork.querySelectorAll(".pin-card").forEach(n => n.remove());
   if (!$("#map").innerHTML) $("#map").outerHTML = mapSVG().replace("<svg ", '<svg class="map" id="map" aria-hidden="true" ');
-  const n = solvedCount();
+  const n = solvedCount(), nx = nextCase();
+  $("#board-cta").innerHTML = `<a class="btn big" href="${playHref()}">${playLabel()} ${ARROW}</a>
+    <span class="prog" aria-label="${n} of 5 cases reconstructed">${CASES.map(c => `<i class="${state.solved[c.id] ? "on" : ""}"></i>`).join("")}<b>${n} of 5 reconstructed</b></span>`;
   const frag = document.createDocumentFragment();
   const center = document.createElement("div");
   center.className = "pin-card center-card"; center.style.gridArea = "center";
   center.innerHTML = `<span class="pin" aria-hidden="true"></span>
     <span class="mug">${mugSVG()}</span>
     <p class="center-q">Who is Sanjay Krishna?<svg viewBox="0 0 210 80" preserveAspectRatio="none" aria-hidden="true"><path d="M14 46 C8 18 120 4 186 16 C214 22 208 58 168 68 C110 80 26 74 12 52 C4 38 40 22 96 18"/></svg></p>
-    <p class="center-p"><span class="dots" aria-hidden="true">${CASES.map(c => `<i class="${state.solved[c.id] ? "on" : ""}"></i>`).join("")}</span>${n} of 5 cases closed</p>
-    ${n >= 3 ? `<a class="btn" href="#deduction">${state.final ? "Review the final deduction" : "Make the final deduction"}</a>` : `<p class="center-note">Close three cases to attempt the final deduction.</p>`}`;
+    <p class="center-p">${n} of 5 cases reconstructed</p>
+    ${n >= 3 && !state.final ? `<a class="btn" href="#deduction">Final question</a>` : n >= 3 ? `<a class="btn ghost-paper" href="#deduction">The pattern</a>` : `<p class="center-note">Reconstruct three cases to unlock the final question.</p>`}`;
   frag.appendChild(center);
   CASES.forEach((c, i) => {
-    const a = document.createElement("a"); const done = !!state.solved[c.id];
-    a.className = "pin-card case-card" + (done ? " solved" : ""); a.dataset.case = c.id;
+    const a = document.createElement("a"); const mine = !!state.solved[c.id];
+    a.className = "pin-card case-card" + (mine ? " solved mine" : "") + (nx && nx.id === c.id ? " next" : ""); a.dataset.case = c.id;
     a.href = "#case-" + c.id; a.style.gridArea = "c" + (i + 1); a.style.setProperty("--tilt", TILTS[i] + "deg");
     a.innerHTML = `<span class="pin" aria-hidden="true"></span>
+      ${nx && nx.id === c.id ? `<span class="chip">${n ? "Next" : "Start here"}</span>` : ""}
+      ${mine ? `<span class="chip done">Reconstructed &#10003;</span>` : ""}
       <span class="label">Case ${c.n} &middot; ${c.role}</span>
       <span class="photo">${scene(c.scene)}</span>
       <span class="card-title">${c.title}</span>
       <span class="card-teaser">${c.teaser}</span>
-      <span class="status">${done ? "Closed" : "Open"}</span>`;
+      <span class="status">Solved &middot; ${c.stamp}</span>`;
     frag.appendChild(a);
   });
   EXTRAS.forEach(x => {
@@ -1394,12 +1585,12 @@ function drawStrings(animate) {
   const centerCard = cork.querySelector(".center-card"); if (!centerCard) return;
   const c = pinPoint(centerCard);
   let html = "";
-  cork.querySelectorAll(".case-card.solved").forEach(card => {
+  cork.querySelectorAll(".case-card.mine").forEach(card => {
     const q = pinPoint(card);
     const mx = (c.x + q.x) / 2, my = Math.max(c.y, q.y) + 46;
     html += `<path data-case="${card.dataset.case}" d="M${c.x.toFixed(1)} ${c.y.toFixed(1)} Q${mx.toFixed(1)} ${my.toFixed(1)} ${q.x.toFixed(1)} ${q.y.toFixed(1)}"/>`;
   });
-  svg.innerHTML = `<g fill="none" stroke="#B83E26" stroke-width="2.4" stroke-linecap="round">${html}</g>`;
+  svg.innerHTML = `<g fill="none" stroke="#B4492F" stroke-width="2.4" stroke-linecap="round">${html}</g>`;
   if (!animate || reduce) { svg.querySelectorAll("path").forEach(p => { state.drawn[p.dataset.case] = true; }); return; }
   let changed = false;
   svg.querySelectorAll("path").forEach(p => {
@@ -1412,7 +1603,7 @@ function drawStrings(animate) {
 }
 function renderCabinet() {
   const done = CASES.filter(c => state.solved[c.id]);
-  $("#cab-thoughts").innerHTML = done.length ? done.map(c => `<li><b>${c.verdict.thought.name}</b><span>${c.verdict.thought.t}</span></li>`).join("") : `<li class="empty">Close a case to internalise its thought.</li>`;
+  $("#cab-thoughts").innerHTML = done.length ? done.map(c => `<li><b>${c.verdict.thought.name}</b><span>${c.verdict.thought.t}</span></li>`).join("") : `<li class="empty">Reconstruct a case to see what I took from it.</li>`;
   $("#cab-patterns").innerHTML = done.length ? done.map(c => `<li>${c.verdict.pattern}</li>`).join("") : `<li class="empty">Nothing yet.</li>`;
 }
 const Torch = { on: false, fx: .5, fy: .14, tx: .5, ty: .14, rx: 0, ry: 0, trx: 0, try_: 0, raf: null };
@@ -1440,58 +1631,150 @@ $("#wall").addEventListener("pointermove", e => {
 });
 $("#wall").addEventListener("pointerleave", () => { Torch.tx = .5; Torch.ty = .14; Torch.trx = 0; Torch.try_ = 0; kickTorch(); });
 
-/* ---------- Case ---------- */
+/* ---------- Case: four steps, one obvious next move ---------- */
 let run = null, tcTimer = null;
 const fmtTC = s => [Math.floor(s / 3600), Math.floor(s / 60) % 60, s % 60].map(v => String(v).padStart(2, "0")).join(":");
 const PLAY = `<svg viewBox="0 0 10 10" aria-hidden="true"><path d="M1 0 L10 5 L1 10 Z" fill="currentColor"/></svg>`;
-function openCase(id, replay) {
+function caseNav(c) {
+  const i = CASES.indexOf(c), prev = CASES[i - 1], next = CASES[i + 1];
+  return `<nav class="case-nav" aria-label="Cases">
+    <a class="back" href="#board">&larr; All cases</a>
+    <div class="cn-dots">${CASES.map(x => `<a href="#case-${x.id}" class="${state.solved[x.id] ? "done" : ""}"${x.id === c.id ? ' aria-current="step"' : ""} aria-label="Case ${x.n}: ${x.title}">${x.n}</a>`).join("")}</div>
+    <div class="cn-arrows">${prev ? `<a class="back" href="#case-${prev.id}">&larr; Case ${prev.n}</a>` : ""}${next ? `<a class="back" href="#case-${next.id}">Case ${next.n} &rarr;</a>` : `<a class="back" href="#deduction">Final question &rarr;</a>`}</div>
+  </nav>`;
+}
+function openCase(id, opts = {}) {
   const c = CASES.find(x => x.id === id);
   if (!c) { location.hash = "board"; return; }
-  const el = $("#v-case");
-  el.innerHTML = `
-    <div class="case-top">
-      <a class="back" href="#board">&larr; Board</a>
-      <span class="label">Case ${c.n} of 5 &middot; ${c.role}</span>
-      <button class="skip" id="skip" type="button">Skip to the verdict</button>
-    </div>
-    <h2 class="display case-title">${c.title}</h2>
+  $("#v-case").innerHTML = `${caseNav(c)}
+    <header class="case-head"><span class="label">Case ${c.n} of 5 &middot; ${c.role} &middot; ${c.stamp}</span><h2 class="display case-title">${c.title}</h2></header>
+    <ol class="steps" id="steps">${STEPS.map((s, i) => `<li><span class="sn">${i + 1}</span><span class="st">${s}</span></li>`).join("")}</ol>
     <div class="case-grid">
       <div class="side">
         <figure class="panel"><div class="panel-art">${scene(c.scene, c.alt)}<div class="vhs" aria-hidden="true"><span class="tl">PLAY ${PLAY}</span><span class="tr">SP</span><span class="br" id="tc">TAPE 0${c.n} &middot; 00:00:00</span></div></div><figcaption class="panel-cap">${c.cap}</figcaption></figure>
-        <div class="notes"><span class="label">Notebook</span><ul id="clues"><li class="empty">Nothing yet. Investigate to collect clues.</li></ul></div>
+        <div class="notes"><span class="label">Your notebook</span><ul id="clues"><li class="empty">Clues you find will be pinned here.</li></ul></div>
       </div>
       <div class="main">
-        <div class="log" id="log" aria-live="polite"></div>
-        <div class="choices" id="choices"></div>
+        <div id="stage-body" aria-live="polite"></div>
+        <div class="actionbar" id="actionbar"></div>
       </div>
     </div>`;
   clearInterval(tcTimer);
   if (!reduce) { const t0 = performance.now(); tcTimer = setInterval(() => { const tc = $("#tc"); if (!tc || $("#v-case").hidden) { clearInterval(tcTimer); return; } tc.textContent = `TAPE 0${c.n} · ${fmtTC(Math.floor((performance.now() - t0) / 1000))}`; }, 1000); }
-  run = { c, visited: new Set(), phase: "probe", removed: new Set() };
-  $("#skip").addEventListener("click", skip);
-  $("#log").addEventListener("click", () => $("#log").classList.add("instant"));
-  if (state.solved[c.id] && !replay) {
-    addLines([{ n: "You’ve already closed this case. The file is below." }], "#log", false);
-    c.probes.forEach(p => addClue(p.clue, true));
-    verdict(true);
+  run = { c, step: 0, seen: new Set(), current: null, wrong: new Set(), done: false };
+  if (state.solved[c.id] && !opts.replay) {
+    c.evidence.forEach((e, i) => { run.seen.add(i); addClue(e.clue, true); });
+    run.done = true; goStep(3, true);
     return;
   }
-  addLines(c.intro, "#log", false);
-  choices();
+  goStep(0, true);
 }
-function choices() {
-  const box = $("#choices"); box.innerHTML = "";
-  const c = run.c, opts = []; let hint = "";
-  if (run.phase === "probe") {
-    c.probes.forEach((p, i) => { if (!run.visited.has(i)) opts.push({ t: p.label, f: () => probe(i) }); });
-    if (run.visited.size >= 2) opts.push({ t: "Make your deduction", f: deduce, k: "key" });
-    else hint = run.visited.size === 0 ? "Follow two leads before you make a deduction." : "Follow one more lead before you make a deduction.";
+function setSteps(k) {
+  $$("#steps li").forEach((li, i) => { li.classList.toggle("on", i === k); li.classList.toggle("done", i < k); if (i === k) li.setAttribute("aria-current", "step"); else li.removeAttribute("aria-current"); });
+}
+function actions(html) { $("#actionbar").innerHTML = html; }
+function goStep(k, quiet) {
+  run.step = k; setSteps(k); activeOpts = null;
+  if (!quiet) Sound.page();
+  [stepCase, stepEvidence, stepCall, stepVerdict][k](quiet);
+  if (!quiet) { const head = $("#steps"); const r = head.getBoundingClientRect(); if (r.top < 0 || r.top > innerHeight * .5) head.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); }
+}
+function stepCase() {
+  $("#stage-body").innerHTML = `<div class="log" id="log"></div>`;
+  const log = $("#log"); log.addEventListener("click", () => log.classList.add("instant"));
+  addLines(run.c.brief, log);
+  actions(`<button type="button" class="btn big" id="to-ev">Look at the evidence ${ARROW}</button><button type="button" class="linkish" id="skip">Skip to what I did</button>`);
+  $("#to-ev").addEventListener("click", () => goStep(1));
+  $("#skip").addEventListener("click", skipToVerdict);
+}
+function stepEvidence() {
+  const c = run.c;
+  $("#stage-body").innerHTML = `<p class="step-lede">Three pieces of evidence. Examine at least two; each one pins a clue to your notebook.</p>
+    <div class="ev-grid" id="ev-grid"></div>
+    <div class="ev-view" id="ev-view"></div>`;
+  drawEvidence();
+  if (run.current !== null) showEvidence(run.current, true);
+  else $("#ev-view").innerHTML = `<p class="ev-empty">Pick a card above.</p>`;
+  evActions();
+}
+function drawEvidence() {
+  const c = run.c;
+  $("#ev-grid").innerHTML = c.evidence.map((e, i) => `<button type="button" class="ev${run.seen.has(i) ? " seen" : ""}${run.current === i ? " current" : ""}" data-i="${i}" style="--tilt:${[-1.2, .9, -.6][i]}deg">
+      <span class="label">Evidence ${LETTERS[i]}</span><span class="ev-t">${e.title}</span><span class="ev-cue">${run.seen.has(i) ? "Examined &#10003;" : "Examine"}</span></button>`).join("");
+  $$("#ev-grid .ev").forEach(b => b.addEventListener("click", () => showEvidence(+b.dataset.i)));
+  activeOpts = c.evidence.map((_, i) => ({ f: () => showEvidence(i) }));
+}
+function showEvidence(i, quiet) {
+  const e = run.c.evidence[i], fresh = !run.seen.has(i);
+  run.current = i; run.seen.add(i);
+  const view = $("#ev-view");
+  view.innerHTML = `<span class="label">Evidence ${LETTERS[i]}</span><h3 class="ev-h">${e.title}</h3><div class="log" id="log"></div>`;
+  const log = $("#log"); log.addEventListener("click", () => log.classList.add("instant"));
+  addLines(e.lines, log);
+  if (quiet) log.classList.add("instant");
+  if (fresh) { addClue(e.clue); Sound.open(); }
+  drawEvidence(); evActions();
+  if (!quiet) nudge(view);
+}
+function evActions() {
+  const k = run.seen.size;
+  const note = k === 0 ? "Examine two pieces of evidence to make your call." : k === 1 ? "One more piece of evidence, then you can make your call." : k === 2 ? "Enough to make a call. Or look at the last one." : "All the evidence is in.";
+  actions(`<button type="button" class="btn big" id="to-call"${k < 2 ? " disabled" : ""}>Make your call ${ARROW}</button><span class="act-note">${note}</span>`);
+  $("#to-call").addEventListener("click", () => { if (run.seen.size >= 2) goStep(2); });
+}
+function stepCall() {
+  const c = run.c;
+  $("#stage-body").innerHTML = `<h3 class="q-head">${c.call.q}</h3><p class="step-lede">Pick one. A wrong guess gets you a hint, not a penalty.</p>
+    <div class="calls" id="calls"></div><div class="log" id="log"></div>`;
+  drawCalls(c.call.options, guess);
+  actions(`<button type="button" class="btn ghost" id="back-ev">&larr; Back to the evidence</button>`);
+  $("#back-ev").addEventListener("click", () => goStep(1));
+}
+function drawCalls(options, onPick, box = $("#calls")) {
+  box.innerHTML = options.map((o, i) => `<button type="button" class="call${run && run.wrong.has(i) ? " wrong" : ""}" data-i="${i}"${run && run.wrong.has(i) ? " disabled" : ""}><span class="num">${i + 1}</span><span>${o.t}</span></button>`).join("");
+  $$(".call", box).forEach(b => b.addEventListener("click", () => { if (!b.disabled) onPick(+b.dataset.i, b); }));
+  activeOpts = options.map((_, i) => ({ f: () => { const b = $(`.call[data-i="${i}"]`, box); if (b && !b.disabled) onPick(i, b); } }));
+}
+function guess(i, btn) {
+  const o = run.c.call.options[i], log = $("#log");
+  if (o.ok) {
+    btn.classList.add("right"); $$("#calls .call").forEach(b => { b.disabled = true; });
+    Sound.click();
+    addLines(run.c.solve, log);
+    markSolved(run.c);
+    setTimeout(() => { if (run && run.step === 2) goStep(3); }, reduce ? 300 : 1700);
   } else {
-    c.deduce.options.forEach((d, i) => { if (!run.removed.has(i)) opts.push({ t: d.t, f: () => guess(i) }); });
-    if (c.probes.some((_, i) => !run.visited.has(i))) opts.push({ t: "Not yet. Investigate some more.", f: () => { run.phase = "probe"; addLines([{ you: "Not yet. Keep looking." }]); choices(); }, k: "minor" });
+    run.wrong.add(i); btn.classList.add("wrong"); btn.disabled = true;
+    Sound.wrong();
+    const first = addLines([o.hint], log); if (first && !reduce) first.classList.add("jolt");
   }
-  renderOpts(box, opts);
-  if (hint) box.insertAdjacentHTML("beforeend", `<p class="hint">${hint}</p>`);
+}
+function markSolved(c) { if (!state.solved[c.id]) { state.solved[c.id] = true; save(); } run.done = true; }
+function skipToVerdict() {
+  run.c.evidence.forEach((e, i) => { if (!run.seen.has(i)) { run.seen.add(i); addClue(e.clue, true); } });
+  markSolved(run.c); goStep(3);
+}
+function stepVerdict(quiet) {
+  const c = run.c, v = c.verdict, i = CASES.indexOf(c), nx = CASES.slice(i + 1).find(x => !state.solved[x.id]) || CASES.find(x => !state.solved[x.id]) || null;
+  let primary;
+  if (nx) primary = `<a class="btn big" href="#case-${nx.id}">Next case: ${nx.title} ${ARROW}</a>`;
+  else primary = `<a class="btn big" href="#deduction">${state.final ? "See the pattern again" : "Final question"} ${ARROW}</a>`;
+  $("#stage-body").innerHTML = `<article class="verdict">
+    <svg class="paperclip" viewBox="0 0 26 64" aria-hidden="true"><path d="M8 20 V48 a5 5 0 0 0 10 0 V12 a8 8 0 0 0 -16 0 V50 a11 11 0 0 0 22 0 V22" fill="none" stroke="#8D8F92" stroke-width="2.6" stroke-linecap="round"/></svg>
+    <p class="stamp" aria-hidden="true">Solved ${c.stamp}</p>
+    <h3 class="sr-only">What I actually did</h3>
+    <span class="label">What I actually did</span>
+    <ul>${v.did.map(d => `<li>${d}</li>`).join("")}</ul>
+    <p class="v-row"><span class="label">What happened next</span>${v.outcome}</p>
+    ${v.links.length ? `<p class="v-row"><span class="label">Evidence</span>${v.links.map(link).join(" &middot; ")}</p>` : ""}
+    <div class="v-split">
+      <p class="v-row"><span class="label">What I took away</span><b>${v.thought.name}.</b> ${v.thought.t}</p>
+      <p class="v-row"><span class="label">The pattern</span><span class="hand">${v.pattern}</span></p>
+    </div>
+  </article>`;
+  actions(`${primary}<a class="btn ghost" href="#board">All cases</a><button type="button" class="linkish" id="replay">Replay this case</button>`);
+  $("#replay").addEventListener("click", () => { openCase(c.id, { replay: true }); window.scrollTo(0, 0); });
+  if (!quiet) setTimeout(() => { flashbang(); Sound.stamp(); }, 380);
 }
 function addClue(cl, still) {
   const ul = $("#clues"); if (!ul) return;
@@ -1501,102 +1784,49 @@ function addClue(cl, still) {
   li.innerHTML = cl.key ? `<mark>${cl.t}</mark>` : cl.t;
   ul.appendChild(li);
 }
-function probe(i) { const p = run.c.probes[i]; run.visited.add(i); addLines([{ you: p.label }, ...p.lines]); addClue(p.clue); choices(); }
-function deduce() { run.phase = "deduce"; addLines([{ you: "Make your deduction." }, { q: run.c.deduce.q }]); choices(); }
-function guess(i) {
-  const d = run.c.deduce.options[i];
-  if (d.ok) { addLines([{ you: d.t }, ...run.c.solve]); closeCase(); }
-  else {
-    run.removed.add(i);
-    const first = addLines([{ you: d.t }, ...d.r]);
-    if (first && !reduce) first.classList.add("jolt");
-    choices();
-  }
-}
-function closeCase() {
-  state.solved[run.c.id] = true; save();
-  $("#choices").innerHTML = ""; activeOpts = null;
-  verdict(false);
-}
-function skip() {
-  const existing = $("#log .verdict");
-  if (existing) { existing.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" }); return; }
-  addLines([{ n: "You skip ahead to the file." }]);
-  closeCase();
-}
-function verdict(quiet) {
-  const c = run.c, v = c.verdict, i = CASES.indexOf(c), next = CASES[i + 1], n = solvedCount();
-  let nextBtn = "";
-  if (next) nextBtn = `<a class="btn" href="#case-${next.id}">Next case: ${next.title}</a>`;
-  else if (n >= 3) nextBtn = `<a class="btn" href="#deduction">Make the final deduction</a>`;
-  const art = document.createElement("article");
-  art.className = "verdict";
-  art.innerHTML = `
-    <svg class="paperclip" viewBox="0 0 26 64" aria-hidden="true"><path d="M8 20 V48 a5 5 0 0 0 10 0 V12 a8 8 0 0 0 -16 0 V50 a11 11 0 0 0 22 0 V22" fill="none" stroke="#8D8F92" stroke-width="2.6" stroke-linecap="round"/></svg>
-    <p class="stamp" aria-hidden="true">Case closed</p>
-    <h3 class="sr-only">Case closed</h3>
-    <span class="label">What actually happened</span>
-    <ul>${v.did.map(d => `<li>${d}</li>`).join("")}</ul>
-    <p class="v-row"><span class="label">Outcome</span>${v.outcome}</p>
-    ${v.links.length ? `<p class="v-row"><span class="label">Evidence</span>${v.links.map(link).join(" &middot; ")}</p>` : ""}
-    <div class="v-split">
-      <p class="v-row"><span class="label">Thought internalised</span><b>${v.thought.name}.</b> ${v.thought.t}</p>
-      <p class="v-row"><span class="label">Pattern noted</span><span class="hand">${v.pattern}</span></p>
-    </div>
-    <div class="v-actions">${nextBtn}<a class="btn ghost" href="#board">Back to the board</a><button type="button" class="btn ghost" id="replay">Replay this case</button></div>`;
-  $("#log").appendChild(art);
-  $("#replay").addEventListener("click", () => { openCase(c.id, true); window.scrollTo(0, 0); });
-  const sk = $("#skip"); if (sk) sk.hidden = true;
-  activeOpts = null;
-  if (!quiet) setTimeout(() => { flashbang(); Sound.thud(); }, 420);
-  nudge(art);
-}
 
-/* ---------- Final deduction ---------- */
-let finalRemoved = new Set();
+/* ---------- Final question ---------- */
 function renderDeduction() {
   const el = $("#v-deduction"); const done = CASES.filter(c => state.solved[c.id]);
-  const top = `<div class="case-top"><a class="back" href="#board">&larr; Board</a><span class="label">Final deduction</span></div>`;
+  const top = `<nav class="case-nav" aria-label="Cases"><a class="back" href="#board">&larr; All cases</a><span class="label">Final question</span><span></span></nav>`;
   if (done.length < 3) {
     activeOpts = null;
-    el.innerHTML = `${top}<h2 class="display case-title">Not enough evidence yet</h2><p class="lede">Close at least three cases first. You’ve closed ${done.length}.</p><a class="btn" href="#board">Back to the board</a>`;
+    const n = nextCase();
+    el.innerHTML = `${top}<h2 class="display case-title">Not enough evidence yet</h2><p class="lede">Reconstruct at least three cases first. You’ve done ${done.length}.</p><a class="btn big" href="#case-${n.id}">Continue: Case ${n.n} ${ARROW}</a>`;
     return;
   }
   el.innerHTML = `${top}<h2 class="display case-title">Who is Sanjay Krishna?</h2>
     <div class="final-grid">
-      <div class="notes final-notes"><span class="label">Patterns noted</span><ul>${done.map(c => `<li><span class="label">Case ${c.n}</span>${c.verdict.pattern}</li>`).join("")}</ul></div>
-      <div class="main"><div class="log" id="flog" aria-live="polite"></div><div class="choices" id="fchoices"></div></div>
+      <div class="notes final-notes"><span class="label">The patterns so far</span><ul>${done.map(c => `<li><span class="label">Case ${c.n}</span>${c.verdict.pattern}</li>`).join("")}</ul></div>
+      <div class="main"><h3 class="q-head">${FINAL.q}</h3><div class="calls" id="fcalls"></div><div class="log" id="flog"></div><div id="ending"></div></div>
     </div>`;
-  finalRemoved = new Set();
-  $("#flog").addEventListener("click", () => $("#flog").classList.add("instant"));
-  addLines([{ n: "The rain has eased, and the board is full of red string. Read back through your notes." }, { q: FINAL.q }], "#flog", false);
-  if (state.final) { addLines([{ you: FINAL.options.find(o => o.ok).t }], "#flog", false); ending(true); return; }
-  finalChoices();
+  run = { c: null, wrong: new Set() };
+  if (state.final) { drawCalls(FINAL.options, () => {}, $("#fcalls")); $$("#fcalls .call").forEach((b, i) => { b.disabled = true; if (FINAL.options[i].ok) b.classList.add("right"); }); ending(true); return; }
+  drawCalls(FINAL.options, finalGuess, $("#fcalls"));
 }
-function finalChoices() {
-  const box = $("#fchoices"); box.innerHTML = ""; const opts = [];
-  FINAL.options.forEach((d, i) => { if (!finalRemoved.has(i)) opts.push({ t: d.t, f: () => finalGuess(i) }); });
-  renderOpts(box, opts);
-}
-function finalGuess(i) {
-  const d = FINAL.options[i];
-  if (d.ok) { addLines([{ you: d.t }], "#flog"); state.final = true; save(); $("#fchoices").innerHTML = ""; activeOpts = null; ending(false); }
-  else { finalRemoved.add(i); const first = addLines([{ you: d.t }, ...d.r], "#flog"); if (first && !reduce) first.classList.add("jolt"); finalChoices(); }
+function finalGuess(i, btn) {
+  const o = FINAL.options[i];
+  if (o.ok) {
+    btn.classList.add("right"); $$("#fcalls .call").forEach(b => { b.disabled = true; });
+    state.final = true; save(); activeOpts = null; ending(false);
+  } else {
+    run.wrong.add(i); btn.classList.add("wrong"); btn.disabled = true; Sound.wrong();
+    const first = addLines([o.hint], $("#flog")); if (first && !reduce) first.classList.add("jolt");
+  }
 }
 function ending(quiet) {
   activeOpts = null;
-  const art = document.createElement("article"); art.className = "verdict ending";
-  art.innerHTML = `
+  $("#ending").innerHTML = `<article class="verdict ending">
     <svg class="paperclip" viewBox="0 0 26 64" aria-hidden="true"><path d="M8 20 V48 a5 5 0 0 0 10 0 V12 a8 8 0 0 0 -16 0 V50 a11 11 0 0 0 22 0 V22" fill="none" stroke="#8D8F92" stroke-width="2.6" stroke-linecap="round"/></svg>
-    <p class="stamp" aria-hidden="true">Solved</p><h3 class="sr-only">Solved</h3>
+    <p class="stamp" aria-hidden="true">All solved</p><h3 class="sr-only">All solved</h3>
     <span class="label">The pattern</span>
     <p class="ending-lead">Every case started with a number that seemed to hold the answer.</p>
-    <p>Signups. Watch time. Course completion. Installs. Experiment wins. Each time, the real answer sat underneath: in what learners actually did, or in how the number was being measured. That’s the job, the way he does it.</p>
+    <p>Signups. Watch time. Course completion. Installs. Experiment wins. Each time, the real answer sat underneath: in what learners actually did, or in how the number was being measured. That’s how I work.</p>
+    <p class="hand">Maybe I’ll still end up solving crimes someday.</p>
     <p class="v-row"><span class="label">Get in touch</span>${contactHTML()}</p>
-    <div class="v-actions"><a class="btn" href="#file">Read the case file</a><a class="btn ghost" href="#apartment">Step into the apartment</a></div>`;
-  $("#flog").appendChild(art);
-  if (!quiet) setTimeout(() => { flashbang(); Sound.thud(); }, 420);
-  nudge(art);
+    <div class="v-actions"><a class="btn" href="#apartment">Step into my apartment ${ARROW}</a><a class="btn ghost" href="#file">Read the plain resume</a><a class="btn ghost" data-pdf href="sanjay-krishna-resume.pdf" target="_blank" rel="noopener">Download the PDF</a></div>
+  </article>`;
+  if (!quiet) { setTimeout(() => { flashbang(); Sound.stamp(); }, 380); nudge($("#ending")); }
 }
 
 /* ---------- Apartment ---------- */
@@ -1644,7 +1874,7 @@ function buildApartment() {
   $("#room-loading").remove();
   canvas.setAttribute("aria-hidden", "true");
   host.prepend(canvas);
-  const scene = new T.Scene(); scene.background = new T.Color(0x0a0907); scene.fog = new T.Fog(0x0a0907, 12, 26);
+  const scene = new T.Scene(); scene.background = new T.Color(0x070d0b); scene.fog = new T.Fog(0x070d0b, 12, 26);
   const camera = new T.PerspectiveCamera(34, 1, .1, 80);
   const col = h => new T.Color(h).convertSRGBToLinear();
   const mat = (h, o = {}) => new T.MeshStandardMaterial(Object.assign({ color: col(h), roughness: .85, metalness: 0 }, o));
@@ -1809,7 +2039,7 @@ function buildApartment() {
   }
   function wallTex() {
     const c = document.createElement("canvas"); c.width = c.height = 256; const x = c.getContext("2d");
-    x.fillStyle = "#3C3924"; x.fillRect(0, 0, 256, 256);
+    x.fillStyle = "#33402C"; x.fillRect(0, 0, 256, 256);
     for (let i = 0; i < 46; i++) { const r = 10 + Math.random() * 50, cx = Math.random() * 256, cy = Math.random() * 256, g = x.createRadialGradient(cx, cy, 0, cx, cy, r); g.addColorStop(0, Math.random() < .6 ? "rgba(15,12,5,.2)" : "rgba(120,110,70,.1)"); g.addColorStop(1, "rgba(0,0,0,0)"); x.fillStyle = g; x.fillRect(cx - r, cy - r, r * 2, r * 2); }
     for (let i = 0; i < 12; i++) { const g = x.createLinearGradient(0, 0, 0, 256); g.addColorStop(0, "rgba(20,15,6,.2)"); g.addColorStop(1, "rgba(20,15,6,0)"); x.fillStyle = g; x.fillRect(Math.random() * 256, 0, 2 + Math.random() * 4, 100 + Math.random() * 156); }
     const t = new T.CanvasTexture(c); t.encoding = T.sRGBEncoding; return t;
@@ -2172,6 +2402,7 @@ const SIMPLE = ["board", "apartment", "origin", "file", "deduction"];
 let current = null, firstRoute = true;
 function parse() {
   const h = decodeURIComponent(location.hash.replace(/^#/, ""));
+  if (h === "play") return { redirect: playHref().slice(1) };
   if (SIMPLE.includes(h)) return { view: h };
   if (h.startsWith("case-") && CASES.some(c => c.id === h.slice(5))) return { view: "case", id: h.slice(5) };
   return { view: "cover" };
@@ -2187,7 +2418,9 @@ function show({ view, id }) {
   const navKey = view === "case" || view === "deduction" ? "board" : view;
   $$(".topbar nav a").forEach(a => { if (a.dataset.nav === navKey) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current"); });
   $$(".contact-slot").forEach(e => { e.innerHTML = contactHTML(); });
+  $$("[data-play]").forEach(a => { a.href = playHref(); const l = a.querySelector(".door-k"); if (l) l.textContent = solvedCount() ? (nextCase() ? "Continue the cases" : "Play the cases again") : "Play the cases"; });
   current = view;
+  Sound.scene(view);
   window.scrollTo(0, 0);
   if (view === "cover") Cover.start();
   else if (view === "board") { renderBoard(); boardStart(); }
@@ -2197,6 +2430,7 @@ function show({ view, id }) {
 }
 function route() {
   const target = parse();
+  if (target.redirect) { location.replace("#" + target.redirect); return; }
   if (firstRoute || reduce) { firstRoute = false; show(target); return; }
   const sh = $("#shutter"); sh.classList.remove("cut"); void sh.offsetWidth; sh.classList.add("cut");
   setTimeout(() => show(target), 170);
@@ -2206,18 +2440,18 @@ function route() {
 const PDF = { url: "sanjay-krishna-resume.pdf", name: "Sanjay_Krishna_H_Resume.pdf" };
 let dlCap = null;
 try { if (window.claude && typeof window.claude.use === "function") window.claude.use("downloads").then(d => { dlCap = d; }, () => {}); } catch (e) {}
-$("#dl-pdf").addEventListener("click", async e => {
-  if (!dlCap) return;
+document.addEventListener("click", async e => {
+  const a = e.target.closest("[data-pdf]"); if (!a || !dlCap) return;
   e.preventDefault();
-  const note = $("#dl-note"); note.textContent = "";
+  const note = $("#dl-note"); if (note) note.textContent = "";
   try {
     const res = await fetch(PDF.url); if (!res.ok) throw new Error("fetch");
     await dlCap.save({ filename: PDF.name, data: await res.blob() });
-    note.textContent = "Saved.";
+    if (note) note.textContent = "Saved.";
   } catch (err) {
     const code = err && err.code;
     if (code === "declined") return;
-    if (code === "rate_limited") { note.textContent = "One moment, then try again."; return; }
+    if (code === "rate_limited") { if (note) note.textContent = "One moment, then try again."; return; }
     window.open(PDF.url, "_blank", "noopener");
   }
 });
@@ -2249,7 +2483,7 @@ document.addEventListener("keydown", e => {
   if (e.target.closest("input, textarea, select")) return;
   if (e.key === "Escape" && (current === "case" || current === "deduction" || current === "apartment" || current === "origin")) { location.hash = "board"; return; }
   const n = parseInt(e.key, 10);
-  if (n >= 1 && n <= 9 && activeOpts && activeOpts[n - 1]) { e.preventDefault(); Sound.click(); activeOpts[n - 1].f(); }
+  if (n >= 1 && n <= 9 && activeOpts && activeOpts[n - 1]) { e.preventDefault(); activeOpts[n - 1].f(); }
 });
 if ("ResizeObserver" in window) new ResizeObserver(() => { drawStrings(false); if (current === "board") placeTorch(); }).observe($("#cork"));
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(() => drawStrings(false));
