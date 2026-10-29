@@ -1,6 +1,8 @@
 # The Rough Book Cases
 
-My resume, as five cases I've already solved. Follow along, look at the evidence, and guess what I did. Live at [resume.sjaykh.in](https://resume.sjaykh.in).
+My resume, as the cases I've already solved. Follow along, look at the evidence, and guess what I did. Live at [resume.sjaykh.in](https://resume.sjaykh.in).
+
+These are the cases I remember off the top of my head. There are more. Like any detective, I forget a few, so more will turn up here as they come back to me, and as new ones land on my desk.
 
 There's also a rainy-night apartment you can walk around in 3D, and a boring version: the plain one-page resume.
 
@@ -20,6 +22,19 @@ Progress is saved in your browser. Number keys pick options, and Escape goes bac
 - `audio/`: rain, thunder and page sounds, loaded only when sound is turned on.
 - `sanjay-krishna-resume.pdf`: the resume behind the "Download the PDF" button.
 - `CNAME`: points GitHub Pages at resume.sjaykh.in.
+
+## Adding a case
+
+Each case is one object in the `CASES` list in `index.html`. Copy an existing one, give it the next `n` and a new `id`, and fill in:
+
+- `role`, `stamp` (the year), `title`, `teaser`, `cap` (the camcorder caption) and `alt` (a description of the picture).
+- `brief`: the opening lines. `{ n: "..." }` is narration, `{ p: "Who", t: "..." }` is a person talking, and `{ v: "pattern", c: "Easy: success", t: "..." }` is one of the skills chipping in (`pattern`, `first`, `empathy`, `instr` or `audacity`).
+- `evidence`: three pieces, each with a `title`, `lines` and a `clue`. Mark the clues that matter with `key: true`.
+- `call`: the question and three options. One has `ok: true`; the others get a `hint`.
+- `solve` and `verdict`: what I did, what happened next, links, what I took away (`thought`) and the one-line `pattern`.
+- `scene`: the key of a picture in `SCENES`. Leave a new key and the case gets a plain desk-and-folder picture until it has its own.
+
+The board, the case numbers, the progress dots and the "Case N onwards" card all update from the list, so nothing else needs changing. If the case belongs on the plain resume too, add a line to the boring version and point it at the case with a `case-ref` link.
 
 ## Run it locally
 
@@ -44,6 +59,6 @@ const CONTACT = { email: "", linkedin: "" };
 - Thunderstorm by RHumphries ([Freesound](https://freesound.org/people/RHumphries/sounds/2523/)), CC BY. Three thunder rolls cut out and re-encoded.
 - Page flip, book open and thud from Kenney's RPG Audio pack ([kenney.nl](https://kenney.nl)), CC0.
 - [Three.js r128](https://threejs.org/) from cdnjs for the apartment.
-- Fonts from Google Fonts: Gloock, Newsreader, Archivo Narrow, Cutive Mono, Nanum Pen Script and VT323.
+- Fonts from Google Fonts: Eczar (Rosetta) for titles, Martel for reading, Anek Latin (Ek Type) for labels, Chilanka (Santhosh Thottingal, drawn in Kerala) for handwriting, and VT323 on the camcorder still.
 
 The cases are dramatised from real work and the dialogue is invented. What actually happened is real.
